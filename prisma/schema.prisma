@@ -13,10 +13,81 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  image     String?
+  id    String  @id @default(cuid())
+  name  String
+  email String  @unique
+  image String?
+
+  resumes Resume[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Resume {
+  id         String  @id @default(cuid())
+  title      String
+  targetRole String
+  summary    String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  skills      Skill[]
+  projects    Project[]
+  education   Education[]
+  experiences Experience[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Skill {
+  id       String @id @default(cuid())
+  name     String
+  category String
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id])
+}
+
+model Project {
+  id          String @id @default(cuid())
+  title       String
+  description String
+
+  githubUrl String?
+  liveUrl   String?
+
+  techStack String
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id])
+}
+
+model Education {
+  id String @id @default(cuid())
+
+  institution String
+  degree      String
+
+  startDate DateTime
+  endDate   DateTime?
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id])
+}
+
+model Experience {
+  id String @id @default(cuid())
+
+  company     String
+  role        String
+  description String
+
+  startDate DateTime
+  endDate   DateTime?
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id])
 }
