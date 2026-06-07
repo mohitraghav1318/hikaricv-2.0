@@ -1,93 +1,113 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id    String  @id @default(cuid())
-  name  String
-  email String  @unique
-  image String?
-
-  resumes Resume[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  emailVerified DateTime?
+  accounts      Account[]
+  resumes       Resume[]
+  sessions      Session[]
 }
 
 model Resume {
-  id         String  @id @default(cuid())
-  title      String
-  targetRole String
-  summary    String?
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  skills      Skill[]
-  projects    Project[]
+  id          String       @id @default(cuid())
+  title       String
+  targetRole  String
+  summary     String?
+  userId      String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   education   Education[]
   experiences Experience[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  projects    Project[]
+  user        User         @relation(fields: [userId], references: [id])
+  skills      Skill[]
 }
 
 model Skill {
   id       String @id @default(cuid())
   name     String
   category String
-
   resumeId String
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  resume   Resume @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 }
 
 model Project {
-  id          String @id @default(cuid())
+  id          String   @id @default(cuid())
   title       String
   description String
-
-  githubUrl String?
-  liveUrl   String?
-
-  techStack String
-
-  resumeId String
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  githubUrl   String?
+  liveUrl     String?
+  techStack   String[]
+  resumeId    String
+  resume      Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 }
 
 model Education {
-  id String @id @default(cuid())
-
+  id          String    @id @default(cuid())
   institution String
   degree      String
-
-  startDate DateTime
-  endDate   DateTime?
-
-  resumeId String
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  startDate   DateTime
+  endDate     DateTime?
+  resumeId    String
+  resume      Resume    @relation(fields: [resumeId], references: [id], onDelete: Cascade)
 }
 
 model Experience {
-  id String @id @default(cuid())
-
+  id          String    @id @default(cuid())
   company     String
   role        String
   description String
+  startDate   DateTime
+  endDate     DateTime?
+  resumeId    String
+  resume      Resume    @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
 
-  startDate DateTime
-  endDate   DateTime?
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  resumeId String
-  resume   Resume @relation(fields: [resumeId], references: [id])
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
 }
