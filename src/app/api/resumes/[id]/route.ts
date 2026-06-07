@@ -1,7 +1,7 @@
 import { auth } from "@/server/auth/auth";
 import { prisma } from "@/server/db/prisma";
 import { NextResponse } from "next/server";
-
+import { getResumeById } from "@/server/services/resume.service";
 
 //  Get resume
 export async function GET(
@@ -19,11 +19,7 @@ if (!session?.user) {
 
 const { id } = await params;
 
-const resume = await prisma.resume.findUnique({
-  where: {
-    id,
-  },
-});
+const resume = await getResumeById(id);
 
 if (!resume) {
   return NextResponse.json(
@@ -59,11 +55,7 @@ if (!session?.user) {
 
 const { id } = await params;
 
-const resume = await prisma.resume.findUnique({
-  where: {
-    id,
-  },
-});
+const resume = await getResumeById(id);
 
 if (!resume) {
   return NextResponse.json(
@@ -115,11 +107,7 @@ if (!session?.user) {
 
 const { id } = await params;
 
-const resume = await prisma.resume.findUnique({
-  where: {
-    id,
-  },
-});
+const resume = await getResumeById(id);
 
 if (!resume) {
   return NextResponse.json(

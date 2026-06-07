@@ -1,7 +1,9 @@
 import { auth } from "@/server/auth/auth";
 import { NextResponse } from "next/server";
 import { prisma } from "@/server/db/prisma";
+import { getUserResumes } from "@/server/services/resume.service";
 
+// 
 export async function GET() {
   const session = await auth();
 
@@ -11,16 +13,13 @@ export async function GET() {
       { status: 401 }
     );
   }
-
-  const resumes = await prisma.resume.findMany({
-    where: {
-      userId: session.user.id,
-    },
-  });
+// services 
+  const resumes = await getUserResumes(session.user.id!);
 
   return NextResponse.json(resumes);
 }
 
+// 
 export async function POST(request: Request) {
   const session = await auth();
 
