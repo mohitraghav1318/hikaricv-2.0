@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import "../style/home.scss"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
+import Loading from '../../../components/Loading'
 
 const Home = () => {
 
@@ -18,13 +19,12 @@ const Home = () => {
         navigate(`/interview/${data._id}`)
     }
 
-    if (loading) {
+    if(loading){
         return (
-            <main className='loading-screen'>
-                <h1>Loading your interview plan...</h1>
-            </main>
+            <Loading />
         )
     }
+
 
     return (
         <div className='home-page'>
@@ -32,7 +32,7 @@ const Home = () => {
             {/* Page Header */}
             <header className='page-header'>
                 <h1>Create Your Custom <span className='highlight'>Interview Plan</span></h1>
-                <p>Let our AI analyze the job requirements and your unique profile to build a winning strategy.</p>
+                <p className='secondary'>Let our AI analyze the job requirements and your unique profile to build a winning strategy.</p>
             </header>
 
             {/* Main Card */}
@@ -101,12 +101,12 @@ const Home = () => {
                         </div>
 
                         {/* Info Box */}
-                        <div className='info-box'>
+                        {/* <div className='info-box'>
                             <span className='info-box__icon'>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" stroke="#1a1f27" strokeWidth="2" /><line x1="12" y1="16" x2="12.01" y2="16" stroke="#1a1f27" strokeWidth="2" /></svg>
                             </span>
                             <p>Either a <strong>Resume</strong> or a <strong>Self Description</strong> is required to generate a personalized plan.</p>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -138,12 +138,7 @@ const Home = () => {
                 </section>
             )}
 
-            {/* Page Footer */}
-            <footer className='page-footer'>
-                <a href='#'>Privacy Policy</a>
-                <a href='#'>Terms of Service</a>
-                <a href='#'>Help Center</a>
-            </footer>
+            
         </div>
     )
 }

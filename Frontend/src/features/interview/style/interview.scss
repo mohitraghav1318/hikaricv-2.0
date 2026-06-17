@@ -1,20 +1,24 @@
 @use "sass:color";
 
 // ── Shared Variables (mirrors home.scss theme) ────────────────────────────────
-$bg-page: #0d1117;
-$bg-card: #161b22;
-$bg-panel: #1c2230;
-$bg-input: #1e2535;
-$border-color: #2a3348;
-$text-primary: #e6edf3;
-$text-muted: #7d8590;
-$accent: #ff2d78;
+$bg-page:   #ccc1c1;
+$bg-card:        #dfe4eb;
+$bg-panel:       #b9c6e4;
+$bg-input:       #fafafb;
+
+$border-color:   #4f4d4d;
+$text-primary:   #212223;
+$text-muted:     #2e333a;
+$accent:         #ff2d78;
 $font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
 // severity palette
-$severity-high: #ff4d4d;
-$severity-medium: #f5a623;
-$severity-low: #3fb950;
+$severity-high: #c80c0c;
+$severity-medium: #ca810d;
+$severity-low: #12b828;
+
+
+
 
 *::-webkit-scrollbar {
     display: none;
