@@ -1,0 +1,212 @@
+// ====================================================
+// Design tokens
+// ====================================================
+$primary: #fd2270; // brand pink — CTAs, accents, active states
+$bg: #161616; // site default background
+$bg-glass: rgba(22, 22, 22, 0.78); // navbar bg once scrolled / mobile sheet
+$text: #f5f5f6; // primary text on dark bg
+$text-muted: #9a9a9a; // resting nav-link color
+$border: rgba(255, 255, 255, 0.08); // hairline dividers
+
+$font-display: 'Space Grotesk', 'Inter', sans-serif;
+
+.navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  font-family: $font-display;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s ease, border-color 0.4s ease;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  // Frosted-glass state once the page has scrolled past 20px
+  &--scrolled {
+    background: $bg-glass;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid $border;
+  }
+
+  &__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    height: 76px;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    @media (max-width: 880px) {
+      padding: 0 20px;
+      height: 68px;
+    }
+  }
+
+  // ---------- Brand (left) ----------
+  &__brand {
+    display: flex;
+    align-items: baseline;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  &__brand-light {
+    color: $text;
+  }
+  &__brand-accent {
+    color: $primary;
+  }
+
+  // ---------- Center nav links (desktop) ----------
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    position: relative;
+
+    @media (max-width: 880px) {
+      display: none;
+    }
+  }
+  &__link-wrap {
+    position: relative;
+    padding-bottom: 6px;
+  }
+  &__link {
+    color: $text-muted;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.25s ease;
+
+    &:hover {
+      color: $text;
+    }
+  }
+  &__underline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: $primary;
+    box-shadow: 0 0 12px rgba($primary, 0.6);
+  }
+
+  // ---------- Auth actions (right, desktop) ----------
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+
+    @media (max-width: 880px) {
+      display: none;
+    }
+  }
+  &__login {
+    color: $text;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    transition: background 0.25s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+  &__signup {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: $bg;
+    background: $primary;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    box-shadow: 0 0 0 0 rgba($primary, 0);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 24px rgba($primary, 0.4);
+    }
+  }
+
+  // ---------- Hamburger toggle (mobile only) ----------
+  &__toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: $text;
+    cursor: pointer;
+
+    @media (max-width: 880px) {
+      display: flex;
+    }
+  }
+
+  // ---------- Mobile sheet ----------
+  &__mobile {
+    overflow: hidden;
+    background: $bg-glass;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid $border;
+  }
+  &__mobile-inner {
+    padding: 8px 20px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  &__mobile-link {
+    color: $text;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    padding: 14px 4px;
+    border-bottom: 1px solid $border;
+  }
+  &__mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 18px;
+  }
+  &__login--mobile,
+  &__signup--mobile {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 18px;
+  }
+
+  // ---------- Accessibility: visible keyboard focus ----------
+  &__link:focus-visible,
+  &__login:focus-visible,
+  &__signup:focus-visible,
+  &__toggle:focus-visible,
+  &__mobile-link:focus-visible,
+  &__brand:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
