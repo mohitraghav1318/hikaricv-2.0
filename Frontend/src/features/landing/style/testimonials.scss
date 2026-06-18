@@ -197,3 +197,171 @@
     color: #666;
 
 }
+
+@include tablet {
+
+    .testimonials {
+
+        padding: 6rem 0;
+
+    }
+
+
+    .testimonials-container {
+
+        grid-template-columns: 1fr;
+
+        gap: 4rem;
+
+    }
+
+
+    .left {
+
+        text-align: center;
+
+        align-items: center;
+
+    }
+
+
+    .left h2 {
+
+        font-size: 2.5rem;
+
+    }
+
+
+    .left p {
+
+        max-width: 650px;
+
+        font-size: 1.2rem;
+
+    }
+
+
+    .stats {
+
+        width: 100%;
+
+        gap: 2rem;
+
+    }
+
+
+    .stat {
+
+        text-align: center;
+
+    }
+
+
+    .stat h3 {
+
+        font-size: 3rem;
+
+    }
+
+
+    .right {
+
+        width: 100%;
+
+    }
+
+}
+
+@include mobile {
+
+    .testimonials {
+
+        padding: 4rem 0;
+
+    }
+
+
+    .left h2 {
+
+        font-size: 2rem;
+
+    }
+
+
+    .left p {
+
+        font-size: 1rem;
+
+        line-height: 1.7;
+
+    }
+
+
+    .stats {
+
+        grid-template-columns: 1fr;
+
+        gap: 1.5rem;
+
+    }
+
+
+    .stat h3 {
+
+        font-size: 2.5rem;
+
+    }
+
+
+    .line {
+
+        display: none;
+
+    }
+
+
+    .testimonial-card {
+
+        margin-left: 0;
+
+        padding: 2rem;
+
+        border-radius: 20px;
+
+    }
+
+
+    .testimonial-card.active {
+
+        border-left: none;
+
+        border-top: 4px solid $primary;
+
+    }
+
+
+    .quote {
+
+        font-size: 1.15rem;
+
+        line-height: 1.8;
+
+    }
+
+
+    .user {
+
+        margin-top: 1.5rem;
+
+    }
+
+
+    .user img {
+
+        width: 48px;
+
+        height: 48px;
+
+    }
+
+}

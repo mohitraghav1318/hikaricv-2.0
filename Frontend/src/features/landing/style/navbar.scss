@@ -1,7 +1,10 @@
 @use "../../../style/variables" as *;
-
 @use "../../../style/mixins" as *;
 
+
+/* ===========================
+   NAVBAR
+=========================== */
 
 .landing-navbar {
 
@@ -9,15 +12,13 @@
 
     top: 0;
 
-    z-index: 100;
+    z-index: 1000;
 
     background: rgba(255,255,255,.85);
 
     backdrop-filter: blur(12px);
 
-    border-bottom:
-
-      1px solid rgba(0,0,0,.05);
+    border-bottom: 1px solid rgba(0,0,0,.05);
 
 }
 
@@ -37,6 +38,10 @@
 }
 
 
+/* ===========================
+   LOGO
+=========================== */
+
 .logo {
 
     font-size: 1.8rem;
@@ -45,12 +50,20 @@
 
     color: $primary;
 
+    z-index: 1001;
+
 }
 
+
+/* ===========================
+   CENTER LINKS
+=========================== */
 
 .nav-links {
 
     display: flex;
+
+    align-items: center;
 
     gap: 3rem;
 
@@ -63,7 +76,7 @@
 
     font-weight: 500;
 
-    transition: .3s;
+    transition: color .3s ease;
 
 }
 
@@ -74,6 +87,10 @@
 
 }
 
+
+/* ===========================
+   RIGHT ACTIONS
+=========================== */
 
 .nav-actions {
 
@@ -118,12 +135,145 @@
 
 .get-started:hover {
 
-    transform:
-
-      translateY(-2px);
+    transform: translateY(-2px);
 
     box-shadow:
 
       0 15px 40px rgba(253,34,112,.3);
+
+}
+
+
+/* ===========================
+   MOBILE ELEMENTS
+=========================== */
+
+.menu-btn,
+
+.mobile-login,
+
+.mobile-btn {
+
+    display: none;
+
+}
+
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 768px) {
+
+    .navbar-container {
+
+        height: 70px;
+
+    }
+
+
+    /* Hide desktop buttons */
+
+    .nav-actions {
+
+        display: none;
+
+    }
+
+
+    /* Hamburger */
+
+    .menu-btn {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: transparent;
+
+        border: none;
+
+        cursor: pointer;
+
+        z-index: 1001;
+
+    }
+
+
+    /* Mobile Menu */
+
+    .nav-links {
+
+        position: fixed;
+
+        top: 70px;
+
+        left: -100%;
+
+        width: 100%;
+
+        height: calc(100vh - 70px);
+
+        background: white;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: flex-start;
+
+        align-items: center;
+
+        gap: 2rem;
+
+        padding-top: 3rem;
+
+        transition: left .3s ease;
+
+        z-index: 999;
+
+    }
+
+
+    .nav-links.active {
+
+        left: 0;
+
+    }
+
+
+    .mobile-login,
+
+    .mobile-btn {
+
+        display: block;
+
+    }
+
+
+    .mobile-login {
+
+        font-weight: 600;
+
+        color: #222;
+
+    }
+
+
+    .mobile-btn {
+
+        background: $primary;
+
+        color: white;
+
+        padding: .8rem 1.5rem;
+
+        border-radius: 999px;
+
+        font-weight: 600;
+
+    }
 
 }
