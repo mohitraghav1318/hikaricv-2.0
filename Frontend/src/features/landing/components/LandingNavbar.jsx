@@ -30,31 +30,24 @@ const LandingNavbar = () => {
         >
 
           <a
-            href="#resume"
-            onClick={() => setOpen(false)}
-          >
-            Resume Gen
-          </a>
-
-          <a
-            href="#interview"
-            onClick={() => setOpen(false)}
-          >
-            Interview Prep
-          </a>
-
-          <a
-            href="#skills"
-            onClick={() => setOpen(false)}
-          >
-            Skill Analysis
-          </a>
-
-          <a
             href="#pricing"
             onClick={() => setOpen(false)}
           >
             Pricing
+          </a>
+
+          <a
+            href="#docs"
+            onClick={() => setOpen(false)}
+          >
+            Docs
+          </a>
+
+          <a
+            href="#aboutus"
+            onClick={() => setOpen(false)}
+          >
+            About us
           </a>
 
 
