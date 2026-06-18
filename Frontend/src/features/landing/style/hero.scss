@@ -1,0 +1,94 @@
+$primary: #fd2270;
+$secondary: #ccc1c1;
+$para: #51574f;
+$dark: #111111;
+
+.hero {
+  min-height: calc(100vh - 70px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden;
+
+  background: $secondary;
+  padding: 2rem;
+}
+
+.hero-content {
+  max-width:100%;
+  text-align: center;
+  z-index: 2;
+
+  h1 {
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 800;
+    color: $dark;
+    line-height: 1.1;
+
+    span {
+      color: $primary;
+      text-shadow: 0 0 20px rgba($primary, 0.25);
+    }
+  }
+
+  p {
+    margin-top: 1.5rem;
+
+    font-size: 1.15rem;
+    line-height: 1.7;
+
+    color: $para;
+  }
+}
+
+.hero-buttons {
+  margin-top: 2.5rem;
+
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 0.9rem 1.8rem;
+
+  border-radius: 999px;
+  text-decoration: none;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  transition: all 0.3s ease;
+}
+
+.secondary-button {
+  border: 1px solid $secondary;
+  color: $dark;
+  background: rgb(248, 245, 245);
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+    transform: translateY(-3px);
+  }
+}
+
+.hero-glow {
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  background: $primary;
+  opacity: 0.12;
+  filter: blur(130px);
+
+  border-radius: 50%;
+
+  top: -120px;
+  right: -120px;
+}

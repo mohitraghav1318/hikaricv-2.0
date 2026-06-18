@@ -1,17 +1,19 @@
+@use "sass:color";
+
 // ── Variables ────────────────────────────────────────────────────────────────
-$bg-page:        #0d1117;
-$bg-card:        #161b22;
-$bg-panel:       #1c2230;
-$bg-input:       #1e2535;
-$border-color:   #2a3348;
-$text-primary:   #e6edf3;
+$bg-page:        #ccc1c1;
+$bg-card:        #dfe4eb;
+$bg-panel:       #b9c6e4;
+$bg-input:       #fafafb;
+$border-color:   #4f4d4d;
+$text-primary:   #212223;
 $text-muted:     #7d8590;
 $accent:         #ff2d78;
 $accent-alt:     #ff6b9d;
 $badge-required: #ff2d78;
 $badge-best:     #ff2d78;
-$info-bg:        #1b2a4a;
-$info-border:    #2d4a7a;
+$info-bg:        #cdc9c9;
+$info-border:    #d71515;
 $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
 // ── Page Shell ───────────────────────────────────────────────────────────────
@@ -51,6 +53,7 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
 
     .highlight {
         color: $accent;
+
     }
 }
 
@@ -301,7 +304,11 @@ $font-stack:     system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Robot
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    background: linear-gradient(135deg, $accent 0%, darken($accent, 10%) 100%);
+    background: linear-gradient(
+  135deg,
+  $accent 0%,
+  color.adjust($accent, $lightness: -10%) 100%
+);
     color: #fff;
     font-size: 0.9rem;
     font-weight: 600;
