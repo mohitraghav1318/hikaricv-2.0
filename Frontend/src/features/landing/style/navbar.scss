@@ -1,0 +1,129 @@
+@use "../../../style/variables" as *;
+
+@use "../../../style/mixins" as *;
+
+
+.landing-navbar {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    background: rgba(255,255,255,.85);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom:
+
+      1px solid rgba(0,0,0,.05);
+
+}
+
+
+.navbar-container {
+
+    @include container;
+
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.logo {
+
+    font-size: 1.8rem;
+
+    font-weight: 800;
+
+    color: $primary;
+
+}
+
+
+.nav-links {
+
+    display: flex;
+
+    gap: 3rem;
+
+}
+
+
+.nav-links a {
+
+    color: #5b5563;
+
+    font-weight: 500;
+
+    transition: .3s;
+
+}
+
+
+.nav-links a:hover {
+
+    color: $primary;
+
+}
+
+
+.nav-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+
+}
+
+
+.login {
+
+    color: #222;
+
+    font-weight: 600;
+
+}
+
+
+.get-started {
+
+    background: $primary;
+
+    color: white;
+
+    padding: .75rem 1.5rem;
+
+    border-radius: 999px;
+
+    font-weight: 700;
+
+    transition: .3s;
+
+    box-shadow:
+
+      0 10px 25px rgba(253,34,112,.2);
+
+}
+
+
+.get-started:hover {
+
+    transform:
+
+      translateY(-2px);
+
+    box-shadow:
+
+      0 15px 40px rgba(253,34,112,.3);
+
+}

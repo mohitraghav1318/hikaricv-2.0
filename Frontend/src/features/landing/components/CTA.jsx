@@ -1,13 +1,63 @@
-import React from "react";
 import { Link } from "react-router";
+import "../style/cta.scss";
+
 const CTA = () => {
   return (
-    <div className="cta">
-      <h2>Ready to take your interview skills to the next level?</h2>
+    <section className="cta">
 
-      <Link to={"/register"} className="button primary-button">Register</Link>
-      
-    </div>
+      <div className="cta-container">
+
+        <div className="circle top"></div>
+
+        <div className="circle bottom"></div>
+
+        <h2>
+
+          Ready to Ace Your
+
+          <span> Next Interview?</span>
+
+        </h2>
+
+        <p>
+
+          Join thousands of students and professionals
+          using AI to build resumes, practice interviews,
+          and land better jobs.
+
+        </p>
+
+        <div className="cta-buttons">
+
+          <Link
+            to="/register"
+            className="cta-primary"
+          >
+
+            Start Free Practice
+
+          </Link>
+
+          <Link
+            to="/demo"
+            className="cta-secondary"
+          >
+
+            View Demo
+
+          </Link>
+
+        </div>
+
+        <span className="cta-note">
+
+          No credit card required. Cancel anytime.
+
+        </span>
+
+      </div>
+
+    </section>
   );
 };
 

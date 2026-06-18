@@ -1,0 +1,75 @@
+/* ===========================
+   COLORS
+=========================== */
+
+$primary: #fd2270;
+$primary-light: #ff4d8d;
+$primary-dark: #d91b5f;
+
+$bg: #0f1117;
+$bg-secondary: #171923;
+$bg-card: #1d1f29;
+
+$text: #ffffff;
+$text-secondary: #a1a1aa;
+
+$border: rgba(255, 255, 255, 0.08);
+
+$success: #22c55e;
+$warning: #f59e0b;
+$error: #ef4444;
+
+
+/* ===========================
+   TYPOGRAPHY
+=========================== */
+
+$font-primary: "Inter", sans-serif;
+
+$fs-xs: 0.75rem;
+$fs-sm: 0.875rem;
+$fs-md: 1rem;
+$fs-lg: 1.25rem;
+$fs-xl: 2rem;
+$fs-2xl: 3rem;
+
+
+/* ===========================
+   SPACING
+=========================== */
+
+$space-xs: 0.5rem;
+$space-sm: 1rem;
+$space-md: 1.5rem;
+$space-lg: 2rem;
+$space-xl: 4rem;
+
+
+/* ===========================
+   BORDER RADIUS
+=========================== */
+
+$radius-sm: 10px;
+$radius-md: 20px;
+$radius-lg: 30px;
+
+
+/* ===========================
+   SHADOWS
+=========================== */
+
+$shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+$shadow-primary:
+  0 0 20px rgba(253, 34, 112, 0.2),
+  0 0 40px rgba(253, 34, 112, 0.1);
+
+
+/* ===========================
+   BREAKPOINTS
+=========================== */
+
+$mobile: 480px;
+$tablet: 768px;
+$laptop: 1024px;
+$desktop: 1280px;

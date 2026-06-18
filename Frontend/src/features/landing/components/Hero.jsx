@@ -1,38 +1,82 @@
 import React from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
+
 import "../style/hero.scss";
 
 const Hero = () => {
   return (
     <section className="hero">
-      <motion.div
-        className="hero-content"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-      >
-        <h1>
-          Welcome to <span>HikariCV</span>
-        </h1>
 
-        <p>
-          Prepare smarter with AI-powered resumes, mock interviews,
-          technical questions, and personalized feedback.
-        </p>
+      <div className="hero-container">
 
-        <div className="hero-buttons">
-          <Link to="/register" className="button primary-button">
-            Get Started
-          </Link>
+        <motion.div
+          className="hero-content"
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: .7 }}
+        >
 
-          <Link to="/login" className="button secondary-button">
-            Login
-          </Link>
-        </div>
-      </motion.div>
+          <span className="hero-badge">
+            NEXT-GEN CAREER TECH
+          </span>
 
-      <div className="hero-glow"></div>
+          <h1>
+
+            Elevate your career with
+
+            <br />
+
+            <span>AI-driven</span> precision.
+
+          </h1>
+
+          <p>
+
+            From ATS-optimized resumes to real-time interview
+            simulations, HikariCV is your personal career coach
+            powered by the latest language models.
+
+          </p>
+
+          <div className="hero-buttons">
+
+            <Link
+              to="/register"
+              className="button primary-button"
+            >
+              Get Started
+            </Link>
+
+            <Link
+              to="/login"
+              className="button secondary-button"
+            >
+              Login
+            </Link>
+
+          </div>
+
+        </motion.div>
+
+        <motion.div
+          className="hero-image"
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: .7 }}
+        >
+
+          <div className="hero-image-glow"></div>
+
+          <img
+  src="/landing/hero.png"
+  alt="Interview AI"
+/>
+
+        </motion.div>
+
+      </div>
+
     </section>
   );
 };
