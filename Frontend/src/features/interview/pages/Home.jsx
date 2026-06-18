@@ -3,12 +3,15 @@ import "../style/home.scss"
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate } from 'react-router'
 import Loading from '../../../components/Loading'
+import { useAuth } from '../../auth/hooks/useAuth.js'
 
 const Home = () => {
 
     const { loading, generateReport,reports } = useInterview()
+    const { handleLogout } = useAuth()
     const [ jobDescription, setJobDescription ] = useState("")
     const [ selfDescription, setSelfDescription ] = useState("")
+    const [ isSettingsOpen, setIsSettingsOpen ] = useState(false)
     const resumeInputRef = useRef()
 
     const navigate = useNavigate()
@@ -17,6 +20,11 @@ const Home = () => {
         const resumeFile = resumeInputRef.current.files[ 0 ]
         const data = await generateReport({ jobDescription, selfDescription, resumeFile })
         navigate(`/interview/${data._id}`)
+    }
+
+    const handleLogoutClick = async () => {
+        await handleLogout()
+        navigate("/login")
     }
 
     if(loading){
@@ -28,6 +36,14 @@ const Home = () => {
 
     return (
         <div className='home-page'>
+            <button
+                className='settings-btn'
+                type='button'
+                aria-label='Open settings'
+                onClick={() => setIsSettingsOpen(true)}
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.72l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /><circle cx="12" cy="12" r="3" /></svg>
+            </button>
 
             {/* Page Header */}
             <header className='page-header'>
@@ -136,6 +152,34 @@ const Home = () => {
                         ))}
                     </ul>
                 </section>
+            )}
+
+            {isSettingsOpen && (
+                <div className='settings-modal' role='dialog' aria-modal='true' aria-labelledby='settings-title'>
+                    <div className='settings-modal__panel'>
+                        <div className='settings-modal__header'>
+                            <h2 id='settings-title'>Settings</h2>
+                            <button
+                                className='settings-modal__close'
+                                type='button'
+                                aria-label='Close settings'
+                                onClick={() => setIsSettingsOpen(false)}
+                            >
+                                ×
+                            </button>
+                        </div>
+
+                        <p className='settings-modal__text'>Manage your account session.</p>
+
+                        <button
+                            className='logout-btn'
+                            type='button'
+                            onClick={handleLogoutClick}
+                        >
+                            Logout
+                        </button>
+                    </div>
+                </div>
             )}
 
             
