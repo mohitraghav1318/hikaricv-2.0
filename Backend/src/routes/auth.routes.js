@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const authController = require("../controllers/auth.controller")
 const authMiddleware = require("../middlewares/auth.middleware")
+const rateLimitMiddleware = require("../middlewares/rateLimit.middleware")
 
 const authRouter = Router()
 
@@ -9,7 +10,7 @@ const authRouter = Router()
  * @description Register a new user
  * @access Public
  */
-authRouter.post("/register", authController.registerUserController)
+authRouter.post("/register", rateLimitMiddleware.registerLimiter, authController.registerUserController)
 
 
 /**
@@ -17,7 +18,39 @@ authRouter.post("/register", authController.registerUserController)
  * @description login user with email and password
  * @access Public
  */
-authRouter.post("/login", authController.loginUserController)
+authRouter.post("/login", rateLimitMiddleware.loginLimiter, authController.loginUserController)
+
+
+/**
+ * @route POST /api/auth/forgot-password
+ * @description send a password reset email when the account exists
+ * @access Public
+ */
+authRouter.post("/forgot-password", rateLimitMiddleware.forgotPasswordLimiter, authController.forgotPasswordController)
+
+
+/**
+ * @route POST /api/auth/reset-password/:token
+ * @description reset password with a valid password reset token
+ * @access Public
+ */
+authRouter.post("/reset-password/:token", rateLimitMiddleware.resetPasswordLimiter, authController.resetPasswordController)
+
+
+/**
+ * @route GET /api/auth/verify-email/:token
+ * @description verify a user's email address with a valid verification token
+ * @access Public
+ */
+authRouter.get("/verify-email/:token", authController.verifyEmailController)
+
+
+/**
+ * @route POST /api/auth/resend-verification
+ * @description resend email verification when an unverified account exists
+ * @access Public
+ */
+authRouter.post("/resend-verification", rateLimitMiddleware.forgotPasswordLimiter, authController.resendVerificationController)
 
 
 /**

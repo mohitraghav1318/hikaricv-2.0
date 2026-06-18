@@ -39,6 +39,72 @@ export async function login({ email, password }) {
 
 }
 
+export async function forgotPassword({ email }) {
+
+    try {
+
+        const response = await api.post("/api/auth/forgot-password", {
+            email
+        })
+
+        return response.data
+
+    } catch (err) {
+        console.log(err)
+        throw err.response?.data || { message: "Something went wrong" }
+    }
+
+}
+
+export async function resetPassword({ token, password }) {
+
+    try {
+
+        const response = await api.post(`/api/auth/reset-password/${token}`, {
+            password
+        })
+
+        return response.data
+
+    } catch (err) {
+        console.log(err)
+        throw err.response?.data || { message: "Something went wrong" }
+    }
+
+}
+
+export async function verifyEmail({ token }) {
+
+    try {
+
+        const response = await api.get(`/api/auth/verify-email/${token}`)
+
+        return response.data
+
+    } catch (err) {
+        console.log(err)
+        throw err.response?.data || { message: "Something went wrong" }
+    }
+
+}
+
+export async function resendVerification({ email }) {
+
+    try {
+
+        const response = await api.post("/api/auth/resend-verification", {
+            email
+        })
+
+        return response.data
+
+    } catch (err) {
+        console.log(err)
+        throw err.response?.data || { message: "Something went wrong" }
+    }
+
+}
+
 export async function logout() {
     try {
 

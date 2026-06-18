@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken")
 const tokenBlacklistModel = require("../models/blacklist.model")
+const userModel = require("../models/user.model")
 
 
 
@@ -40,4 +41,23 @@ async function authUser(req, res, next) {
 }
 
 
-module.exports = { authUser }
+async function requireVerifiedEmail(req, res, next) {
+    const user = await userModel.findById(req.user.id)
+
+    if (!user) {
+        return res.status(401).json({
+            message: "User not found."
+        })
+    }
+
+    if (!user.isEmailVerified) {
+        return res.status(403).json({
+            message: "Please verify your email before using this feature."
+        })
+    }
+
+    next()
+}
+
+
+module.exports = { authUser, requireVerifiedEmail }

@@ -2,23 +2,51 @@ import { createBrowserRouter } from "react-router";
 import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
 import Protected from "./features/auth/components/Protected";
+import PublicOnly from "./features/auth/components/PublicOnly";
 import Home from "./features/interview/pages/Home";
 import Interview from "./features/interview/pages/Interview";
 import HiariCVLanding from "./features/landing/pages/HiariCVLanding";
+import ResetPassword from "./features/auth/pages/ResetPassword";
+import ForgotPassword from "./features/auth/pages/ForgotPassword";
+import VerifyEmail from "./features/auth/pages/VerifyEmail";
 
 
 export const router = createBrowserRouter([
     {
         path: "/login",
-        element: <Login />
+        element: (
+            <PublicOnly>
+                <Login />
+            </PublicOnly>
+        )
     },
     {
         path: "/register",
-        element: <Register />
+        element: (
+            <PublicOnly>
+                <Register />
+            </PublicOnly>
+        )
     },
+   {
+    path : "/forgot-password",
+    element: <ForgotPassword />
+   },
+   {
+    path : "/reset-password/:token",
+    element: <ResetPassword />
+   },
+   {
+    path : "/verify-email/:token",
+    element: <VerifyEmail />
+   },
     {
   path: "/",
-  element: <HiariCVLanding />
+  element: (
+    <PublicOnly>
+      <HiariCVLanding />
+    </PublicOnly>
+  )
 }
 ,
 {

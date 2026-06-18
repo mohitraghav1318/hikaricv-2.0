@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router'
 import "../auth.form.scss"
 import { useAuth } from '../hooks/useAuth'
 import Loading from '../../../components/Loading'
+import Navbar from '../../landing/components/LandingNavbar'
 
 const Login = () => {
 
@@ -26,6 +27,7 @@ const Login = () => {
 
 
     return (
+        // <LandingNavbar />
         <main>
             <div className="form-container">
                 <h1>Login</h1>
@@ -44,6 +46,7 @@ const Login = () => {
                     </div>
                     <button className='button primary-button' >Login</button>
                 </form>
+                <p><Link to={"/forgot-password"}>Forgot password?</Link></p>
                 <p>Don't have an account? <Link to={"/register"} >Register</Link> </p>
             </div>
         </main>
