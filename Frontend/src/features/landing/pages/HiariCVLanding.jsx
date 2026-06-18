@@ -6,33 +6,23 @@ import CTA from "../components/CTA";
 import Testimonials from "../components/Testimonials";
 import HowItWorks from "../components/HowItWorks";
 
+import LandingNavbar from "../components/LandingNavbar";
+import Footer from "../components/Footer";
+
 const HiariCVLanding = () => {
   return (
     <div className="hiaricv-app">
+      <LandingNavbar />
+
       <Hero />
       <Features />
-      <HowItWorks />
+
       <Testimonials />
       <CTA />
+
+      <Footer />
     </div>
   );
 };
 
 export default HiariCVLanding;
-
-
-// const HiariCVLanding = () => {
-//   return (
-//     <div className="hiaricv-app">
-//       
-//       
-//       
-//       
-//       
-//       
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default HiariCVLanding;

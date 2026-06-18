@@ -1,0 +1,66 @@
+@use "./variables" as *;
+
+
+/* Reset */
+
+* {
+
+  margin: 0;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+}
+
+html {
+
+  scroll-behavior: smooth;
+
+}
+
+body {
+
+  font-family: $font-primary;
+
+  background: $bg;
+
+  color: $text;
+
+  min-height: 100vh;
+
+  overflow-x: hidden;
+
+}
+
+
+a {
+
+  text-decoration: none;
+
+  color: inherit;
+
+}
+
+
+button {
+
+  font-family: inherit;
+
+}
+
+
+img {
+
+  max-width: 100%;
+
+  display: block;
+
+}
+
+
+ul {
+
+  list-style: none;
+
+}
