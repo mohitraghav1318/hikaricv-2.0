@@ -3,8 +3,6 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { ArrowLeft, Home } from "lucide-react";
 import SEO from "../../../seo/SEO";
-import LandingNavbar from "../components/LandingNavbar";
-import Footer from "../components/Footer";
 
 import "../style/not-found.scss";
 
@@ -14,10 +12,7 @@ const NotFound = () => {
       <SEO 
         title="404 - Page Not Found | HikariCV" 
         description="The page you are looking for does not exist." 
-      />
-      <LandingNavbar />
-      
-      <section className="not-found">
+      /><section className="not-found">
         <div className="not-found-glow"></div>
         <div className="not-found-container">
           <motion.div 
@@ -64,10 +59,7 @@ const NotFound = () => {
             </motion.div>
           </motion.div>
         </div>
-      </section>
-
-      <Footer />
-    </div>
+      </section></div>
   );
 };
 

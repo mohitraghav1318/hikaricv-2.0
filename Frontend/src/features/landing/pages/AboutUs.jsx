@@ -1,5 +1,3 @@
-import LandingNavbar from "../components/LandingNavbar";
-import Footer from "../components/Footer";
 import AboutHero from "../components/about/AboutHero";
 import AboutMission from "../components/about/AboutMission";
 import AboutValues from "../components/about/AboutValues";
@@ -13,15 +11,11 @@ import "../about.scss";
 const AboutUs = () => {
   return (
     <div className="about-page">
-      <SEO {...aboutSEO} />
-      <LandingNavbar />
-      <AboutHero />
+      <SEO {...aboutSEO} /><AboutHero />
       <AboutMission />
       <AboutValues />
       <AboutTeam />
-      <AboutStats />
-      <Footer />
-    </div>
+      <AboutStats /></div>
   );
 };
 
