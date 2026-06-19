@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Menu, X } from "lucide-react";
 import { useAuth } from "../features/auth/hooks/useAuth";
 
@@ -7,7 +7,16 @@ import "../features/landing/style/navbar.scss";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { user } = useAuth();
+  const { user, handleLogout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogoutClick = async () => {
+    if (handleLogout) {
+      await handleLogout();
+    }
+    setOpen(false);
+    navigate("/login");
+  };
 
   return (
     <header className="landing-navbar">
@@ -19,16 +28,15 @@ const Navbar = () => {
 
         {/* Nav Links */}
         <nav className={`nav-links ${open ? "active" : ""}`}>
-          <a href="/pricing" onClick={() => setOpen(false)}>
+          <Link to="/pricing" className="Pricing">
             Pricing
-          </a>
-          <a href="/docs" onClick={() => setOpen(false)}>
+          </Link>
+          <Link to="/docs">
             Docs
-          </a>
-          <a href="/about" onClick={() => setOpen(false)}>
-            About us
-          </a>
-
+          </Link>
+          <Link to="/about">
+            About US
+          </Link>
           {/* Mobile only */}
           {!user ? (
             <>
@@ -40,9 +48,18 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-            <Link to="/dashboard" className="mobile-btn" onClick={() => setOpen(false)}>
-              Dashboard
-            </Link>
+            <>
+              <Link to="/dashboard" className="mobile-login" onClick={() => setOpen(false)}>
+                Dashboard
+              </Link>
+              <button
+                className="mobile-btn"
+                onClick={handleLogoutClick}
+                style={{ border: 'none', fontFamily: 'inherit', cursor: 'pointer', fontSize: 'inherit' }}
+              >
+                Logout
+              </button>
+            </>
           )}
         </nav>
 
@@ -58,9 +75,18 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-            <Link to="/dashboard" className="get-started">
-              Dashboard
-            </Link>
+            <>
+              <Link to="/dashboard" className="login">
+                Dashboard
+              </Link>
+              <button
+                className="get-started"
+                onClick={handleLogoutClick}
+                style={{ border: 'none', fontFamily: 'inherit', cursor: 'pointer', fontSize: 'inherit' }}
+              >
+                Logout
+              </button>
+            </>
           )}
         </div>
 
