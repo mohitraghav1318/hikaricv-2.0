@@ -1,0 +1,13 @@
+# HikariCV - Robots.txt
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /interview/
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password/
+Disallow: /verify-email/
+
+# Sitemap
+Sitemap: https://hikari-cv.vercel.app/sitemap.xml
