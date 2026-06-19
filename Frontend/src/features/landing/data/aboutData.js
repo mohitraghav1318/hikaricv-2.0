@@ -26,7 +26,7 @@ export const teamMembers = [
   {
     id: 1,
     name: "Mohit Raghav",
-    role: "Founder & CEO",
+    role: "Web Developer",
     image:
       "https://pbs.twimg.com/profile_images/1973786254819885056/LmhD__B0_400x400.jpg",
   },
