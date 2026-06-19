@@ -10,55 +10,73 @@ import ResetPassword from "./features/auth/pages/ResetPassword";
 import ForgotPassword from "./features/auth/pages/ForgotPassword";
 import VerifyEmail from "./features/auth/pages/VerifyEmail";
 
+import Docs from "./features/landing/pages/Docs";
+import AboutUs from "./features/landing/pages/AboutUs";
+import Pricing from "./features/landing/pages/Pricing";
+
 
 export const router = createBrowserRouter([
-    {
-        path: "/login",
-        element: (
-            <PublicOnly>
-                <Login />
-            </PublicOnly>
-        )
-    },
-    {
-        path: "/register",
-        element: (
-            <PublicOnly>
-                <Register />
-            </PublicOnly>
-        )
-    },
-   {
-    path : "/forgot-password",
+
+  {
+    path: "/docs",
+    element: <Docs />
+  },
+  {
+    path: "/about",
+    element: <AboutUs />
+  },
+  {
+    path: "/pricing",
+    element: <Pricing />
+  },
+
+  {
+    path: "/login",
+    element: (
+      <PublicOnly>
+        <Login />
+      </PublicOnly>
+    )
+  },
+  {
+    path: "/register",
+    element: (
+      <PublicOnly>
+        <Register />
+      </PublicOnly>
+    )
+  },
+  {
+    path: "/forgot-password",
     element: <ForgotPassword />
-   },
-   {
-    path : "/reset-password/:token",
+  },
+  {
+    path: "/reset-password/:token",
     element: <ResetPassword />
-   },
-   {
-    path : "/verify-email/:token",
+  },
+  {
+    path: "/verify-email/:token",
     element: <VerifyEmail />
-   },
-    {
-  path: "/",
-  element: (
-    <PublicOnly>
-      <HiariCVLanding />
-    </PublicOnly>
-  )
-}
-,
-{
-  path: "/dashboard",
-  element: (
-    <Protected>
-      <Home />
-    </Protected>
-  )
-},
-    {
-        path:"/interview/:interviewId",
-        element: <Protected><Interview /></Protected>
-    }
+  },
+  {
+    path: "/",
+    element: (
+      <PublicOnly>
+        <HiariCVLanding />
+      </PublicOnly>
+    )
+  }
+  ,
+  {
+    path: "/dashboard",
+    element: (
+      <Protected>
+        <Home />
+      </Protected>
+    )
+  },
+  {
+    path: "/interview/:interviewId",
+    element: <Protected><Interview /></Protected>
+  }
 ])

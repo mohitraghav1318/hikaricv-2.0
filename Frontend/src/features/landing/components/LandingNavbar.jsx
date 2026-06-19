@@ -30,21 +30,21 @@ const LandingNavbar = () => {
         >
 
           <a
-            href="#pricing"
+            href="/pricing"
             onClick={() => setOpen(false)}
           >
             Pricing
           </a>
 
           <a
-            href="#docs"
+            href="/docs"
             onClick={() => setOpen(false)}
           >
             Docs
           </a>
 
           <a
-            href="#aboutus"
+            href="/about"
             onClick={() => setOpen(false)}
           >
             About us
