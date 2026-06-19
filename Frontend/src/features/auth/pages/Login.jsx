@@ -3,8 +3,6 @@ import { useNavigate, Link } from 'react-router'
 import "../auth.form.scss"
 import { useAuth } from '../hooks/useAuth'
 import Loading from '../../../components/Loading'
-import LandingNavbar from '../../../features/landing/components/LandingNavbar'
-import Footer from '../../../features/landing/components/Footer'
 
 
 const Login = () => {
@@ -29,9 +27,7 @@ const Login = () => {
 
 
     return (
-        <>
-            <LandingNavbar />
-            <main className="auth-page">
+        <><main className="auth-page">
             <section className="auth-visual" aria-hidden="true">
                 <div className="auth-visual__content">
                     <p className="auth-brand">HikariCV</p>
@@ -74,9 +70,7 @@ const Login = () => {
                     <p className="auth-switch">Don't have an account? <Link to={"/register"} >Create an account</Link> </p>
                 </div>
             </section>
-        </main>
-        <Footer />
-        </>
+        </main></>
     )
 }
 

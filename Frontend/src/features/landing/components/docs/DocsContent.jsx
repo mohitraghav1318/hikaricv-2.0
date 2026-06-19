@@ -59,9 +59,8 @@ const DocsContent = () => {
           {steps.map((step) => (
             <div className="docs-step" key={step.id}>
               <div
-                className={`docs-step-number ${
-                  step.active ? "docs-step-number--active" : ""
-                }`}
+                className={`docs-step-number ${step.active ? "docs-step-number--active" : ""
+                  }`}
               >
                 {step.id}
               </div>
@@ -99,7 +98,7 @@ const DocsContent = () => {
         <div className="docs-visual-wrapper">
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbuh535-FqnRoEzjuzpM_iLLVNfz-p3QVb6Llwkz4NzEqXfiDSrj1RLJQPYJO4NcPWSF8yG1KM7EJjXKZ-plqDReBQpBVasfqDRhC2DEiXolSO1GqaFpRRESFWcx_JLgGSzlIN2BxSrVxgguxcSlG1A6f4uPUpS9u04N-ILczoszKjALG88dEWOxFU0S_6a2C_x0MamCU4U3oIzWNQZG-btHPuxn_zYyxyPZHpYcPgvgmoi-4sSeYbHLJ5D484MHY_XEixzfZr_xLH"
-            alt="InterviewAI Dashboard showing performance metrics and AI analytics"
+            alt="HikariCV Dashboard showing performance metrics and AI analytics"
           />
         </div>
       </section>

@@ -1,14 +1,10 @@
-import LandingNavbar from "../components/LandingNavbar";
-import Footer from "../components/Footer";
 import PricingCard from "../components/PricingCard";
 import { pricingPlans } from "../data/pricingData";
 import '../pricing.scss';
 
 const Pricing = () => {
     return (
-        <>
-            <LandingNavbar />
-            <div className="pricing-page">
+        <><div className="pricing-page">
                 <div className="pricing-container">
                     <div className="pricing-header-text">
                         <h2>Choose Your Growth Path</h2>
@@ -21,9 +17,7 @@ const Pricing = () => {
                         ))}
                     </div>
                 </div>
-            </div>
-            <Footer />
-        </>
+            </div></>
     )
 }
 

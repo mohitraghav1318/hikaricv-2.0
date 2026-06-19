@@ -84,9 +84,9 @@ export const steps = [
 ];
 
 export const heroContent = {
-  title: "Getting Started with InterviewAI",
+  title: "Getting Started with HikariCV",
   description:
-    "Welcome to the InterviewAI developer and user guide. This documentation will help you integrate AI-powered interview prep into your workflow, from crafting the perfect resume to mastering real-time voice mocks.",
+    "Welcome to the HikariCV developer and user guide. This documentation will help you integrate AI-powered interview prep into your workflow, from crafting the perfect resume to mastering real-time voice mocks.",
   breadcrumbs: [
     { label: "Docs", href: "#" },
     { label: "Getting Started", href: null },

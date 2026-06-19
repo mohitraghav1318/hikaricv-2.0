@@ -10,9 +10,9 @@ const Footer = () => {
         </a>
 
         <nav className="footer__links" aria-label="Footer">
-          <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#about">About</a>
+          <a href="/docs">Docs</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/about">About</a>
         </nav>
 
         <p className="footer__copy">© 2026 HikariCV. All rights reserved.</p>
