@@ -62,11 +62,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/",
-        element: (
-          <PublicOnly>
-            <HiariCVLanding />
-          </PublicOnly>
-        )
+        element: <HiariCVLanding />
       },
       {
         path: "/dashboard",
