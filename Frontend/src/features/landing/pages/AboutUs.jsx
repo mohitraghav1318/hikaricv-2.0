@@ -6,7 +6,7 @@ import AboutValues from "../components/about/AboutValues";
 import AboutTeam from "../components/about/AboutTeam";
 import AboutStats from "../components/about/AboutStats";
 
-import "../style/about.scss";
+import "../about.scss";
 
 const AboutUs = () => {
   return (
