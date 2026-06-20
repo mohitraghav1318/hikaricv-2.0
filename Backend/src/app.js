@@ -4,6 +4,9 @@ const cors = require("cors")
 
 const app = express()
 
+// Trust the reverse proxy to allow secure cookies
+app.set("trust proxy", 1)
+
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
