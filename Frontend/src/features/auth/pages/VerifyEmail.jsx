@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Link, useParams } from "react-router"
 import "../auth.form.scss"
 import { verifyEmail } from "../services/auth.api"
@@ -8,8 +8,12 @@ const VerifyEmail = () => {
 
     const [ message, setMessage ] = useState("Verifying your email...")
     const [ error, setError ] = useState("")
+    const hasFetched = useRef(false)
 
     useEffect(() => {
+        if (hasFetched.current) return
+        hasFetched.current = true
+
         const verifyUserEmail = async () => {
             try {
                 const data = await verifyEmail({ token })
@@ -22,6 +26,7 @@ const VerifyEmail = () => {
 
         verifyUserEmail()
     }, [ token ])
+
 
     return (
         <main>
