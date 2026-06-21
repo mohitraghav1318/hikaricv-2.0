@@ -1,0 +1,205 @@
+@import "../../../style/variables";
+
+.notification-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 360px;
+    max-height: 480px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: fadeInSlide 0.2s ease-out;
+
+    @media (max-width: 480px) {
+        width: 300px;
+        right: -50px;
+    }
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    h3 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1e1b29;
+    }
+
+    .mark-read-btn {
+        background: transparent;
+        border: none;
+        color: $primary;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+    }
+}
+
+.dropdown-body {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.empty-state {
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    color: #8c8599;
+    font-size: 0.9rem;
+}
+
+.notifications-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification-item {
+    display: flex;
+    gap: 0.85rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    &.unread {
+        background-color: rgba(253, 34, 112, 0.04);
+
+        &:hover {
+            background-color: rgba(253, 34, 112, 0.07);
+        }
+
+        .notification-icon {
+            color: $primary;
+            background: rgba(253, 34, 112, 0.1);
+        }
+    }
+}
+
+.notification-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50px;
+    color: #8c8599;
+    background: rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+}
+
+.notification-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+}
+
+.notification-message {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    color: #3b3543;
+    font-weight: 500;
+}
+
+.notification-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.2rem;
+}
+
+.resend-action-btn {
+    align-self: flex-start;
+    background: $primary;
+    color: white;
+    border: none;
+    padding: 0.35rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: background 0.2s, transform 0.1s;
+
+    &:hover:not(:disabled) {
+        background: $primary-dark;
+        transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+.resend-status {
+    font-size: 0.7rem;
+    font-weight: 500;
+
+    &.success {
+        color: #10b981;
+    }
+
+    &.error {
+        color: #ef4444;
+    }
+}
+
+.notification-time {
+    font-size: 0.75rem;
+    color: #a19bb0;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

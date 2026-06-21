@@ -277,3 +277,61 @@
     }
 
 }
+
+/* ===========================
+   NOTIFICATION BELL
+=========================== */
+
+.notification-bell-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &.desktop-bell {
+        display: flex;
+    }
+
+    &.mobile-bell {
+        display: none;
+    }
+
+    @media (max-width: 768px) {
+        &.desktop-bell {
+            display: none;
+        }
+
+        &.mobile-bell {
+            display: flex;
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.bell-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #5b5563;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #1e1b29;
+    }
+}
+
+.unread-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    background-color: $primary;
+    border-radius: 50%;
+    border: 2px solid white;
+}
