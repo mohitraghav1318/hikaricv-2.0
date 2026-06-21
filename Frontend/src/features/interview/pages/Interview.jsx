@@ -8,7 +8,8 @@ import {
     ChevronRight,
     ChevronDown,
     Code2,
-    Sparkles
+    Sparkles,
+    Download
 } from 'lucide-react'
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -66,7 +67,7 @@ const RoadMapDay = ({ day }) => (
 // ── Main Component ────────────────────────────────────────────────────────────
 const Interview = () => {
     const [activeNav, setActiveNav] = useState('technical')
-    const { report, getReportById, loading, getResumePdf } = useInterview()
+    const { report, getReportById, loading, getResumePdf, setIsFeatureModalOpen } = useInterview()
     const { interviewId } = useParams()
     const navigate = useNavigate()
 
@@ -87,7 +88,7 @@ const Interview = () => {
             report.matchScore >= 60 ? 'score--mid' : 'score--low'
 
     const handleNotAvailable = () => {
-        alert("This feature is not available yet.");
+        setIsFeatureModalOpen(true);
     };
 
     return (
@@ -100,13 +101,22 @@ const Interview = () => {
 
             {/* Main Content */}
             <main className='interview-main'>
-                {/* Breadcrumb */}
-                <div className='interview-breadcrumb'>
-                    <span className='breadcrumb-link' onClick={() => navigate('/dashboard')}>Plans</span>
-                    <ChevronRight size={14} />
-                    <span className='breadcrumb-current'>
-                        Executive Report: {report.title || 'Untitled Position'}
-                    </span>
+                {/* Breadcrumb wrapper with Mobile Download Button */}
+                <div className='interview-breadcrumb-wrapper'>
+                    <div className='interview-breadcrumb'>
+                        <span className='breadcrumb-link' onClick={() => navigate('/dashboard')}>Plans</span>
+                        <ChevronRight size={14} />
+                        <span className='breadcrumb-current'>
+                            Executive Report: {report.title || 'Untitled Position'}
+                        </span>
+                    </div>
+                    <button 
+                        className="mobile-download-btn"
+                        onClick={() => getResumePdf(interviewId)}
+                    >
+                        <Download size={14} />
+                        <span>Download Resume</span>
+                    </button>
                 </div>
 
                 {/* Two-column content layout */}

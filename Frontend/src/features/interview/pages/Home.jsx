@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import {
     Upload,
@@ -15,9 +15,14 @@ import { useAuth } from '../../auth/hooks/useAuth.js';
 import DashboardSidebar from '../components/DashboardSidebar';
 
 const Home = () => {
-    const { loading, generateReport, reports } = useInterview();
+    const { loading, generateReport, reports, getReports } = useInterview();
     const { user } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        getReports();
+    }, []);
+
 
     const [jobDescription, setJobDescription] = useState("");
     const [selfDescription, setSelfDescription] = useState("");

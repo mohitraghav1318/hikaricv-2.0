@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import FeatureModal from '../FeatureModal';
 
 const Layout = () => {
     return (
@@ -11,8 +12,10 @@ const Layout = () => {
                 <Outlet />
             </main>
             <Footer />
+            <FeatureModal />
         </div>
     );
 };
 
 export default Layout;
+

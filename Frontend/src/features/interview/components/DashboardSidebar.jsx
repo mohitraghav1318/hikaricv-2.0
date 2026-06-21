@@ -10,17 +10,20 @@ import {
     FolderOpen
 } from 'lucide-react';
 import './DashboardSidebar.scss';
+import { useInterview } from '../hooks/useInterview';
 
 const DashboardSidebar = ({ reportId, onDownloadResume }) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const { setIsFeatureModalOpen } = useInterview();
 
     const isHome = location.pathname === '/dashboard';
     const isReport = location.pathname.startsWith('/interview/');
 
     const handleNotAvailable = () => {
-        alert("This feature is not available yet.");
+        setIsFeatureModalOpen(true);
     };
+
 
     const handleInterviewReportClick = () => {
         if (isReport) {

@@ -1,5 +1,5 @@
 import { getAllInterviewReports, generateInterviewReport, getInterviewReportById, generateResumePdf } from "../services/interview.api"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import { InterviewContext } from "../interview.context"
 import { useParams } from "react-router"
 
@@ -13,7 +13,16 @@ export const useInterview = () => {
         throw new Error("useInterview must be used within an InterviewProvider")
     }
 
-    const { loading, setLoading, report, setReport, reports, setReports } = context
+    const { 
+        loading, 
+        setLoading, 
+        report, 
+        setReport, 
+        reports, 
+        setReports,
+        isFeatureModalOpen,
+        setIsFeatureModalOpen
+    } = context
 
     const generateReport = async ({ jobDescription, selfDescription, resumeFile }) => {
         setLoading(true)
@@ -78,14 +87,16 @@ export const useInterview = () => {
         }
     }
 
-    useEffect(() => {
-        if (interviewId) {
-            getReportById(interviewId)
-        } else {
-            getReports()
-        }
-    }, [ interviewId ])
-
-    return { loading, report, reports, generateReport, getReportById, getReports, getResumePdf }
+    return { 
+        loading, 
+        report, 
+        reports, 
+        generateReport, 
+        getReportById, 
+        getReports, 
+        getResumePdf,
+        isFeatureModalOpen,
+        setIsFeatureModalOpen
+    }
 
 }
