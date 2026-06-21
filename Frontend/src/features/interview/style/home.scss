@@ -1,117 +1,20 @@
 @use "../../../style/variables" as *;
 @use "../../../style/mixins" as *;
 
+/* ===========================
+   DASHBOARD CONTAINER
+=========================== */
+
 .dashboard-container {
     display: grid;
     grid-template-columns: 280px 1fr;
-    min-height: calc(100vh - 75px); // Offset navbar height
+    min-height: calc(100vh - 75px);
     background-color: #f8fafc;
     color: #1e293b;
     font-family: $font-primary;
 
     @media (max-width: 992px) {
         grid-template-columns: 1fr;
-    }
-}
-
-/* ===========================
-   SIDEBAR
-=========================== */
-
-.dashboard-sidebar {
-    background-color: #ffffff;
-    border-right: 1px solid #e2e8f0;
-    padding: 2.5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-
-    @media (max-width: 992px) {
-        display: none; // Hidden on mobile, navbar handles primary navigation
-    }
-}
-
-.sidebar-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.95rem;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    color: #475569;
-
-    .brand-dot {
-        width: 10px;
-        height: 10px;
-        background-color: $primary;
-        border-radius: 50%;
-    }
-}
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    .nav-item {
-        display: flex;
-        align-items: center;
-        gap: 0.85rem;
-        padding: 0.85rem 1.25rem;
-        background: transparent;
-        border: none;
-        border-radius: 10px;
-        color: #64748b;
-        font-size: 0.95rem;
-        font-weight: 600;
-        cursor: pointer;
-        text-align: left;
-        transition: all 0.2s ease;
-        font-family: inherit;
-
-        &:hover {
-            background-color: #f1f5f9;
-            color: #0f172a;
-        }
-
-        &.active {
-            background-color: rgba(253, 34, 112, 0.08);
-            color: $primary;
-        }
-    }
-}
-
-.sidebar-divider {
-    height: 1px;
-    background-color: #e2e8f0;
-    margin: 0.5rem 0;
-}
-
-.new-strategy-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background-color: $primary;
-    color: #ffffff;
-    border: none;
-    padding: 0.85rem 1.5rem;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(253, 34, 112, 0.15);
-    font-family: inherit;
-
-    &:hover {
-        background-color: $primary-dark;
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(253, 34, 112, 0.25);
-    }
-
-    &:active {
-        transform: translateY(0);
     }
 }
 
@@ -423,22 +326,6 @@
         color: #64748b;
         margin-top: 0.15rem;
     }
-
-    .view-all-btn {
-        background: transparent;
-        border: none;
-        color: $primary;
-        font-size: 0.9rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: opacity 0.2s;
-        font-family: inherit;
-
-        &:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
-    }
 }
 
 .plans-list {
@@ -533,7 +420,7 @@
     gap: 1.5rem;
 
     @media (max-width: 600px) {
-        display: none; // Simplifies view on smaller screens
+        display: none;
     }
 }
 
@@ -547,36 +434,6 @@
     display: flex;
     align-items: center;
     gap: 0.3rem;
-}
-
-.avatar-stack {
-    display: flex;
-    align-items: center;
-
-    .avatar {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background-color: #e2e8f0;
-        border: 2px solid #ffffff;
-        font-size: 0.65rem;
-        font-weight: 700;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #475569;
-        margin-left: -6px;
-
-        &:first-child {
-            margin-left: 0;
-        }
-
-        &.extra {
-            background-color: $primary;
-            color: #ffffff;
-            font-size: 0.6rem;
-        }
-    }
 }
 
 .plan-action-btn {

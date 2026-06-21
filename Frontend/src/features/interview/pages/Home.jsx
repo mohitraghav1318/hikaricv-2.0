@@ -1,11 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router';
 import {
-    Home as HomeIcon,
-    FileText,
-    User,
-    Bot,
-    Plus,
     Upload,
     ChevronRight,
     Rocket,
@@ -17,6 +12,7 @@ import "../style/home.scss";
 import { useInterview } from '../hooks/useInterview.js';
 import Loading from '../../../components/Loading';
 import { useAuth } from '../../auth/hooks/useAuth.js';
+import DashboardSidebar from '../components/DashboardSidebar';
 
 const Home = () => {
     const { loading, generateReport, reports } = useInterview();
@@ -33,10 +29,6 @@ const Home = () => {
         if (e.target.files && e.target.files[0]) {
             setSelectedFile(e.target.files[0]);
         }
-    };
-
-    const handleNotAvailable = () => {
-        alert("This feature is not available yet.");
     };
 
     const handleGenerateReport = async () => {
@@ -76,39 +68,8 @@ const Home = () => {
 
     return (
         <div className="dashboard-container">
-            {/* Sidebar Navigation */}
-            <aside className="dashboard-sidebar">
-                <div className="sidebar-brand">
-                    <span className="brand-dot"></span>
-                    HikariCV COACH
-                </div>
-
-                <nav className="sidebar-nav">
-                    <button className="nav-item active" onClick={() => navigate('/dashboard')}>
-                        <HomeIcon size={18} />
-                        <span>Home</span>
-                    </button>
-                    <button className="nav-item" onClick={handleNotAvailable}>
-                        <FileText size={18} />
-                        <span>Interview Plans</span>
-                    </button>
-                    <button className="nav-item" onClick={handleNotAvailable}>
-                        <User size={18} />
-                        <span>My Profile</span>
-                    </button>
-                    <button className="nav-item" onClick={handleNotAvailable}>
-                        <Bot size={18} />
-                        <span>AI Assistant</span>
-                    </button>
-                </nav>
-
-                <div className="sidebar-divider"></div>
-
-                <button className="new-strategy-btn" onClick={handleNotAvailable}>
-                    <Plus size={16} />
-                    <span>New Strategy</span>
-                </button>
-            </aside>
+            {/* Shared Sidebar */}
+            <DashboardSidebar />
 
             {/* Main Content Area */}
             <main className="dashboard-main">
@@ -207,9 +168,6 @@ const Home = () => {
                             <h2>My Recent Interview Plans</h2>
                             <p>Your AI-generated roadmaps for recent applications</p>
                         </div>
-                        <button className="view-all-btn" onClick={handleNotAvailable}>
-                            View All &rarr;
-                        </button>
                     </div>
 
                     <div className="plans-list">
@@ -242,13 +200,6 @@ const Home = () => {
                                         <div className="matchscore-badge">
                                             <CheckCircle2 size={14} />
                                             <span>{report.matchScore || 85}% MATCHSCORE</span>
-                                        </div>
-
-                                        <div className="avatar-stack">
-                                            <div className="avatar">JS</div>
-                                            <div className="avatar">TS</div>
-                                            <div className="avatar">R</div>
-                                            <div className="avatar extra">+3</div>
                                         </div>
                                     </div>
 
