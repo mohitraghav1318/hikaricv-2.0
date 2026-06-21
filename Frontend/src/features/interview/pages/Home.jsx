@@ -1,190 +1,268 @@
-import React, { useState, useRef } from 'react'
-import "../style/home.scss"
-import { useInterview } from '../hooks/useInterview.js'
-import { useNavigate } from 'react-router'
-import Loading from '../../../components/Loading'
-import { useAuth } from '../../auth/hooks/useAuth.js'
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import {
+    Home as HomeIcon,
+    FileText,
+    User,
+    Bot,
+    Plus,
+    Upload,
+    ChevronRight,
+    Rocket,
+    CheckCircle2,
+    Briefcase,
+    FileCheck
+} from 'lucide-react';
+import "../style/home.scss";
+import { useInterview } from '../hooks/useInterview.js';
+import Loading from '../../../components/Loading';
+import { useAuth } from '../../auth/hooks/useAuth.js';
 
 const Home = () => {
+    const { loading, generateReport, reports } = useInterview();
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
-    const { loading, generateReport,reports } = useInterview()
-    const { handleLogout } = useAuth()
-    const [ jobDescription, setJobDescription ] = useState("")
-    const [ selfDescription, setSelfDescription ] = useState("")
-    const [ isSettingsOpen, setIsSettingsOpen ] = useState(false)
-    const resumeInputRef = useRef()
+    const [jobDescription, setJobDescription] = useState("");
+    const [selfDescription, setSelfDescription] = useState("");
+    const [profileMode, setProfileMode] = useState("upload"); // "upload" | "bio"
+    const [selectedFile, setSelectedFile] = useState(null);
+    const resumeInputRef = useRef();
 
-    const navigate = useNavigate()
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setSelectedFile(e.target.files[0]);
+        }
+    };
+
+    const handleNotAvailable = () => {
+        alert("This feature is not available yet.");
+    };
 
     const handleGenerateReport = async () => {
-        const resumeFile = resumeInputRef.current.files[ 0 ]
-        const data = await generateReport({ jobDescription, selfDescription, resumeFile })
-        navigate(`/interview/${data._id}`)
-    }
+        if (!jobDescription.trim()) {
+            alert("Please provide a target job description.");
+            return;
+        }
 
-    const handleLogoutClick = async () => {
-        await handleLogout()
-        navigate("/login")
-    }
+        const resumeFile = profileMode === "upload" ? selectedFile : null;
 
-    if(loading){
-        return (
-            <Loading />
-        )
-    }
+        if (profileMode === "upload" && !resumeFile) {
+            alert("Please upload a resume or switch to paste bio.");
+            return;
+        }
+        if (profileMode === "bio" && !selfDescription.trim()) {
+            alert("Please provide a bio self-description.");
+            return;
+        }
 
+        try {
+            const data = await generateReport({
+                jobDescription,
+                selfDescription: profileMode === "bio" ? selfDescription : "",
+                resumeFile
+            });
+            if (data && data._id) {
+                navigate(`/interview/${data._id}`);
+            }
+        } catch (err) {
+            console.error("Failed to generate plan:", err);
+        }
+    };
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
-        <div className='home-page'>
-            <button
-                className='settings-btn'
-                type='button'
-                aria-label='Open settings'
-                onClick={() => setIsSettingsOpen(true)}
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.51a2 2 0 0 1 1-1.72l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" /><circle cx="12" cy="12" r="3" /></svg>
-            </button>
-
-            {/* Page Header */}
-            <header className='page-header'>
-                <h1>Create Your Custom <span className='highlight'>Interview Plan</span></h1>
-                <p className='secondary'>Let our AI analyze the job requirements and your unique profile to build a winning strategy.</p>
-            </header>
-
-            {/* Main Card */}
-            <div className='interview-card'>
-                <div className='interview-card__body'>
-
-                    {/* Left Panel - Job Description */}
-                    <div className='panel panel--left'>
-                        <div className='panel__header'>
-                            <span className='panel__icon'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
-                            </span>
-                            <h2>Target Job Description</h2>
-                            <span className='badge badge--required'>Required</span>
-                        </div>
-                        <textarea
-                            onChange={(e) => { setJobDescription(e.target.value) }}
-                            className='panel__textarea'
-                            placeholder={`Paste the full job description here...\ne.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScript, and large-scale system design...'`}
-                            maxLength={5000}
-                        />
-                        <div className='char-counter'>0 / 5000 chars</div>
-                    </div>
-
-                    {/* Vertical Divider */}
-                    <div className='panel-divider' />
-
-                    {/* Right Panel - Profile */}
-                    <div className='panel panel--right'>
-                        <div className='panel__header'>
-                            <span className='panel__icon'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-                            </span>
-                            <h2>Your Profile</h2>
-                        </div>
-
-                        {/* Upload Resume */}
-                        <div className='upload-section'>
-                            <label className='section-label'>
-                                Upload Resume
-                                <span className='badge badge--best'>Best Results</span>
-                            </label>
-                            <label className='dropzone' htmlFor='resume'>
-                                <span className='dropzone__icon'>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 16 12 12 8 16" /><line x1="12" y1="12" x2="12" y2="21" /><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" /></svg>
-                                </span>
-                                <p className='dropzone__title'>Click to upload or drag &amp; drop</p>
-                                <p className='dropzone__subtitle'>PDF or DOCX (Max 5MB)</p>
-                                <input ref={resumeInputRef} hidden type='file' id='resume' name='resume' accept='.pdf,.docx' />
-                            </label>
-                        </div>
-
-                        {/* OR Divider */}
-                        <div className='or-divider'><span>OR</span></div>
-
-                        {/* Quick Self-Description */}
-                        <div className='self-description'>
-                            <label className='section-label' htmlFor='selfDescription'>Quick Self-Description</label>
-                            <textarea
-                                onChange={(e) => { setSelfDescription(e.target.value) }}
-                                id='selfDescription'
-                                name='selfDescription'
-                                className='panel__textarea panel__textarea--short'
-                                placeholder="Briefly describe your experience, key skills, and years of experience if you don't have a resume handy..."
-                            />
-                        </div>
-
-                        {/* Info Box */}
-                        {/* <div className='info-box'>
-                            <span className='info-box__icon'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" stroke="#1a1f27" strokeWidth="2" /><line x1="12" y1="16" x2="12.01" y2="16" stroke="#1a1f27" strokeWidth="2" /></svg>
-                            </span>
-                            <p>Either a <strong>Resume</strong> or a <strong>Self Description</strong> is required to generate a personalized plan.</p>
-                        </div> */}
-                    </div>
+        <div className="dashboard-container">
+            {/* Sidebar Navigation */}
+            <aside className="dashboard-sidebar">
+                <div className="sidebar-brand">
+                    <span className="brand-dot"></span>
+                    HikariCV COACH
                 </div>
 
-                {/* Card Footer */}
-                <div className='interview-card__footer'>
-                    <span className='footer-info'>AI-Powered Strategy Generation &bull; Approx 30s</span>
-                    <button
-                        onClick={handleGenerateReport}
-                        className='generate-btn'>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z" /></svg>
-                        Generate My Interview Strategy
+                <nav className="sidebar-nav">
+                    <button className="nav-item active" onClick={() => navigate('/dashboard')}>
+                        <HomeIcon size={18} />
+                        <span>Home</span>
                     </button>
-                </div>
-            </div>
+                    <button className="nav-item" onClick={handleNotAvailable}>
+                        <FileText size={18} />
+                        <span>Interview Plans</span>
+                    </button>
+                    <button className="nav-item" onClick={handleNotAvailable}>
+                        <User size={18} />
+                        <span>My Profile</span>
+                    </button>
+                    <button className="nav-item" onClick={handleNotAvailable}>
+                        <Bot size={18} />
+                        <span>AI Assistant</span>
+                    </button>
+                </nav>
 
-            {/* Recent Reports List */}
-            {reports.length > 0 && (
-                <section className='recent-reports'>
-                    <h2>My Recent Interview Plans</h2>
-                    <ul className='reports-list'>
-                        {reports.map(report => (
-                            <li key={report._id} className='report-item' onClick={() => navigate(`/interview/${report._id}`)}>
-                                <h3>{report.title || 'Untitled Position'}</h3>
-                                <p className='report-meta'>Generated on {new Date(report.createdAt).toLocaleDateString()}</p>
-                                <p className={`match-score ${report.matchScore >= 80 ? 'score--high' : report.matchScore >= 60 ? 'score--mid' : 'score--low'}`}>Match Score: {report.matchScore}%</p>
-                            </li>
-                        ))}
-                    </ul>
+                <div className="sidebar-divider"></div>
+
+                <button className="new-strategy-btn" onClick={handleNotAvailable}>
+                    <Plus size={16} />
+                    <span>New Strategy</span>
+                </button>
+            </aside>
+
+            {/* Main Content Area */}
+            <main className="dashboard-main">
+                {/* Welcome Banner */}
+                <section className="welcome-banner">
+                    <h1>Welcome back, {user?.username || 'Alex'}.</h1>
+                    <p>Your next big career move starts with a perfect plan.</p>
                 </section>
-            )}
 
-            {isSettingsOpen && (
-                <div className='settings-modal' role='dialog' aria-modal='true' aria-labelledby='settings-title'>
-                    <div className='settings-modal__panel'>
-                        <div className='settings-modal__header'>
-                            <h2 id='settings-title'>Settings</h2>
-                            <button
-                                className='settings-modal__close'
-                                type='button'
-                                aria-label='Close settings'
-                                onClick={() => setIsSettingsOpen(false)}
-                            >
-                                ×
-                            </button>
+                {/* Plan Creation Section */}
+                <section className="create-plan-card">
+                    <div className="card-header">
+                        <h2>Create Your Custom Interview Plan</h2>
+                        <p>Paste the job details and upload your background to let AI architect your preparation strategy.</p>
+                    </div>
+
+                    <div className="card-grid">
+                        {/* Target Job Description */}
+                        <div className="grid-column">
+                            <label className="column-label">TARGET JOB DESCRIPTION</label>
+                            <textarea
+                                value={jobDescription}
+                                onChange={(e) => setJobDescription(e.target.value)}
+                                placeholder="Paste the job requirements, responsibilities, and company values here..."
+                                className="description-textarea"
+                                maxLength={5000}
+                            />
+                            <div className="char-counter">{jobDescription.length} / 5000 chars</div>
                         </div>
 
-                        <p className='settings-modal__text'>Manage your account session.</p>
+                        {/* Your Profile */}
+                        <div className="grid-column">
+                            <label className="column-label">YOUR PROFILE</label>
 
-                        <button
-                            className='logout-btn'
-                            type='button'
-                            onClick={handleLogoutClick}
-                        >
-                            Logout
+                            {profileMode === "upload" ? (
+                                <div className="profile-box upload-mode">
+                                    <label className="dropzone-area" htmlFor="resume-file">
+                                        <div className="icon-wrapper">
+                                            {selectedFile ? <FileCheck size={28} /> : <Upload size={28} />}
+                                        </div>
+                                        <p className="dropzone-title">
+                                            {selectedFile ? selectedFile.name : "Upload Resume or Portfolio"}
+                                        </p>
+                                        <p className="dropzone-subtitle">
+                                            {selectedFile ? `${(selectedFile.size / 1024 / 1024).toFixed(2)} MB` : "PDF (Max 5MB)"}
+                                        </p>
+                                        <input
+                                            ref={resumeInputRef}
+                                            type="file"
+                                            id="resume-file"
+                                            accept=".pdf,.docx,.txt"
+                                            onChange={handleFileChange}
+                                            hidden
+                                        />
+                                    </label>
+                                    <button
+                                        type="button"
+                                        className="paste-bio-badge"
+                                        onClick={() => setProfileMode("bio")}
+                                    >
+                                        OR PASTE BIO
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="profile-box bio-mode">
+                                    <textarea
+                                        value={selfDescription}
+                                        onChange={(e) => setSelfDescription(e.target.value)}
+                                        placeholder="Briefly describe your experience, key skills, and years of experience..."
+                                        className="bio-textarea"
+                                    />
+                                    <button
+                                        type="button"
+                                        className="paste-bio-badge"
+                                        onClick={() => setProfileMode("upload")}
+                                    >
+                                        OR UPLOAD RESUME
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="card-actions">
+                        <button className="generate-plan-btn" onClick={handleGenerateReport}>
+                            <span>Generate My Plan</span>
+                            <Rocket size={16} />
                         </button>
                     </div>
-                </div>
-            )}
+                </section>
 
-            
+                {/* My Recent Interview Plans */}
+                <section className="recent-plans-section">
+                    <div className="section-header">
+                        <div>
+                            <h2>My Recent Interview Plans</h2>
+                            <p>Your AI-generated roadmaps for recent applications</p>
+                        </div>
+                        <button className="view-all-btn" onClick={handleNotAvailable}>
+                            View All &rarr;
+                        </button>
+                    </div>
+
+                    <div className="plans-list">
+                        {reports.length === 0 ? (
+                            <div className="no-plans-box">
+                                <Briefcase size={36} />
+                                <p>No interview plans generated yet. Create your first plan above!</p>
+                            </div>
+                        ) : (
+                            reports.map((report) => (
+                                <div
+                                    key={report._id}
+                                    className="plan-card-item"
+                                    onClick={() => navigate(`/interview/${report._id}`)}
+                                >
+                                    <div className="plan-logo-wrapper">
+                                        <Briefcase size={20} />
+                                    </div>
+
+                                    <div className="plan-info">
+                                        <h3>{report.title || "Untitled Position"}</h3>
+                                        <p>Generated {new Date(report.createdAt).toLocaleDateString(undefined, {
+                                            month: 'short',
+                                            day: 'numeric',
+                                            year: 'numeric'
+                                        })}</p>
+                                    </div>
+
+                                    <div className="plan-metrics">
+                                        <div className="matchscore-badge">
+                                            <CheckCircle2 size={14} />
+                                            <span>{report.matchScore || 85}% MATCHSCORE</span>
+                                        </div>
+
+                                        <div className="avatar-stack">
+                                            <div className="avatar">JS</div>
+                                            <div className="avatar">TS</div>
+                                            <div className="avatar">R</div>
+                                            <div className="avatar extra">+3</div>
+                                        </div>
+                                    </div>
+
+                                    <button className="plan-action-btn">
+                                        <ChevronRight size={18} />
+                                    </button>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </section>
+            </main>
         </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;
