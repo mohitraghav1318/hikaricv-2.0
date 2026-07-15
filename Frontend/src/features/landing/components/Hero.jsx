@@ -46,13 +46,13 @@ const Hero = () => {
               <ArrowRight size={16} />
             </Link>
 
-            <Link
+            {/* <Link
               to="/login"
               className="button secondary-button"
             >
               <Play size={14} fill="currentColor" />
               <span>Login</span>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Social Proof Stack */}
