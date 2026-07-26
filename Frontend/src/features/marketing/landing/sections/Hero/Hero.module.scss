@@ -1,0 +1,182 @@
+@use "./tokens" as *;
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: $color-bg;
+  padding: 6.5rem 2rem 5rem;
+  color: $color-ink;
+  font-family: $font-body;
+
+  @media (max-width: 640px) {
+    padding: 5rem 1.25rem 3.5rem;
+  }
+}
+
+// quiet dot-grid so the light background isn't dead flat — masked so it
+// only reads near the headline, not edge-to-edge
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(23, 20, 26, 0.09) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 20%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 20%, black 20%, transparent 75%);
+  pointer-events: none;
+}
+
+// single, small, soft glow tucked behind the headline only — no wash across the page
+.glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  width: 620px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(253, 34, 112, 0.14), transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  max-width: 640px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: $color-primary-tint;
+  border: 1px solid rgba(253, 34, 112, 0.18);
+  color: $color-primary-soft;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $color-primary;
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
+}
+
+.title {
+  font-family: $font-display;
+  font-size: clamp(2.4rem, 5vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: $color-ink;
+
+  span {
+    color: $color-primary;
+  }
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: $color-ink-muted;
+  max-width: 520px;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.25rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.primaryButton,
+.secondaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 3.4rem;
+  padding: 0 1.75rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease,
+    color 0.25s ease;
+
+  svg {
+    transition: transform 0.25s ease;
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+.primaryButton {
+  background: $color-primary;
+  color: #fff;
+
+  &:hover {
+    background: $color-primary-soft;
+    box-shadow: 0 10px 24px -8px rgba(253, 34, 112, 0.45);
+    transform: translateY(-2px);
+  }
+}
+
+.secondaryButton {
+  background: $color-surface;
+  color: $color-ink;
+  border-color: $color-border;
+
+  &:hover {
+    border-color: $color-border-hover;
+    color: $color-primary-soft;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
+}
+
+.showcase {
+  width: 100%;
+  margin-top: 3.5rem;
+}

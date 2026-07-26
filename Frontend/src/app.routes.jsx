@@ -6,6 +6,7 @@ import PublicOnly from "./features/auth/components/PublicOnly";
 import Home from "./features/interview/pages/Home";
 import Interview from "./features/interview/pages/Interview";
 import HiariCVLanding from "./features/landing/pages/HiariCVLanding";
+import HeroPreview from "./features/marketing/landing/HeroPreview";
 import ResetPassword from "./features/auth/pages/ResetPassword";
 import ForgotPassword from "./features/auth/pages/ForgotPassword";
 import VerifyEmail from "./features/auth/pages/VerifyEmail";
@@ -60,10 +61,12 @@ export const router = createBrowserRouter([
         path: "/verify-email/:token",
         element: <VerifyEmail />
       },
+      
       {
         path: "/",
-        element: <HiariCVLanding />
+        element: <HeroPreview />
       },
+
       {
         path: "/dashboard",
         element: (

@@ -1,0 +1,30 @@
+// ─────────────────────────────────────────────
+// Hero design tokens — light theme, derived from brand primary #fd2270
+// Import with: @use "../tokens" as *;
+// ─────────────────────────────────────────────
+
+// Surfaces — warm off-white, not stark #fff, so flat areas keep some depth
+$color-bg: #f7f5f2;
+$color-surface: #ffffff;
+$color-surface-alt: #fbfaf8;
+$color-border: rgba(23, 17, 17, 0.08);
+$color-border-hover: rgba(253, 34, 112, 0.35);
+
+// Brand
+$color-primary: #fd2270;
+$color-primary-soft: #e01e63;
+$color-primary-tint: #fff0f5;
+$color-primary-dim: rgba(253, 34, 112, 0.08);
+
+// Ink
+$color-ink: #17141a;
+$color-ink-muted: rgba(23, 20, 26, 0.62);
+$color-ink-faint: rgba(23, 20, 26, 0.4);
+
+// Reserved for "complete" / success states only — do not use decoratively
+$color-gold: #d98c1f;
+
+// Type
+$font-display: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+$font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;

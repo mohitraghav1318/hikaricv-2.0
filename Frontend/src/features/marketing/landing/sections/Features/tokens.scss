@@ -1,0 +1,3 @@
+// Forwards the shared landing tokens so "@use './tokens' as *;" works the
+// same way here as it does in Hero/tokens.scss.
+@forward "../../styles/tokens";
