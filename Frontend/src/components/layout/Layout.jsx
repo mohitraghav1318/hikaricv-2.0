@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 import Navbar from '../layout/Navbar/Navbar';
-import Footer from '../Footer';
+import Footer from '../layout/Footer/Footer';
 import FeatureModal from '../FeatureModal';
 
 const Layout = () => {

@@ -14,7 +14,7 @@ import VerifyEmail from "./features/auth/pages/VerifyEmail";
 // import Docs from "./features/landing/pages/Docs";
 // import AboutUs from "./features/landing/pages/AboutUs";
 // import Pricing from "./features/landing/pages/Pricing";
-// import NotFound from "./features/landing/pages/NotFound";
+import NotFound from "./features/errors/pages/NotFound";
 import Layout from "./components/layout/Layout";
 
 export const router = createBrowserRouter([
@@ -79,10 +79,10 @@ export const router = createBrowserRouter([
         path: "/interview/:interviewId",
         element: <Protected><Interview /></Protected>
       },
-      // {
-      //   path: "*",
-      //   element: <NotFound />
-      // }
+      {
+        path: "*",
+        element: <NotFound />
+      }
     ]
   }
 ]);

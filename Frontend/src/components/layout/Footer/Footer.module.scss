@@ -1,0 +1,51 @@
+@use "../../../features/marketing/landing/sections/Hero/tokens.scss" as *;
+
+.footer {
+  border-top: 1px solid $color-border;
+  background: $color-surface-alt;
+  padding: 2.5rem 1.5rem;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  text-align: center;
+  font-family: $font-body;
+}
+
+.brand {
+  font-family: $font-display;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: $color-ink;
+  text-decoration: none;
+}
+
+.brandAccent {
+  color: $color-primary;
+}
+
+.links {
+  display: flex;
+  gap: 1.8rem;
+
+  a {
+    color: $color-ink-muted;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+.copy {
+  color: $color-ink-faint;
+  font-size: 0.85rem;
+}
