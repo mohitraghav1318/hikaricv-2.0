@@ -1,0 +1,26 @@
+// ===========================
+// CTA — local tokens
+// pulls from the global palette, adds this section's own scale
+// ===========================
+// forward the global palette so any file that @use's this tokens.scss
+// (e.g. CTA.module.scss) gets $primary, $bg, etc. too — @use alone
+// does not re-export, only @forward does
+@forward '../../../../../style/variables';
+@use '../../../../../style/variables' as *;
+
+// signature: a single hairline "scan" that sweeps the panel on reveal
+$cta-glow: radial-gradient(circle at 18% 20%, rgba($primary, 0.16), transparent 55%);
+$cta-glow-soft: radial-gradient(circle at 82% 85%, rgba($primary, 0.10), transparent 50%);
+
+$cta-radius: 28px;
+$cta-radius-sm: 14px;
+
+$cta-border: rgba($text, 0.08);
+$cta-border-strong: rgba($text, 0.14);
+
+// type scale, local to this section only
+$cta-eyebrow-size: 0.78rem;
+$cta-headline-size: clamp(2.25rem, 5vw + 1rem, 4.25rem);
+$cta-sub-size: clamp(1rem, 1.1vw + 0.7rem, 1.2rem);
+
+$cta-ease: cubic-bezier(0.22, 1, 0.36, 1);
