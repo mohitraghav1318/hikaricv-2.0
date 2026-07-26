@@ -6,7 +6,7 @@ import { getNotifications, markNotificationsAsRead } from "../features/auth/serv
 import { resendVerification } from "../features/auth/services/auth.api";
 import NotificationDropdown from "../features/auth/components/NotificationDropdown";
 
-import "../features/landing/style/navbar.scss";
+// import "../features/landing/style/navbar.scss";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
