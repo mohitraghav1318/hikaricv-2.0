@@ -1,0 +1,157 @@
+@use "./tokens" as t;
+
+.section {
+  width: 100%;
+  padding: 96px 24px;
+}
+
+.inner {
+  max-width: t.$testimonials-max-width;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 56px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: t.$star-color;
+  margin-bottom: 12px;
+}
+
+.heading {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: t.$heading-color;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.subheading {
+  font-size: 1.05rem;
+  color: t.$subheading-color;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: t.$testimonials-gap;
+
+  @media (max-width: 960px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative;
+  background: t.$card-bg;
+  border: 1px solid t.$card-border;
+  border-radius: t.$testimonials-card-radius;
+  padding: t.$testimonials-card-padding;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 0; // GSAP animates this in — visible fallback below if JS is disabled
+  transform: translateY(24px);
+  transition: transform t.$transition-medium, box-shadow t.$transition-medium;
+
+  &:hover {
+    transform: translateY(-#{t.$card-hover-lift});
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  }
+}
+
+// Fallback so cards aren't invisible if JS/GSAP fails to load
+.noJs .card {
+  opacity: 1;
+  transform: none;
+}
+
+.quoteMark {
+  font-size: 2.75rem;
+  line-height: 1;
+  font-weight: 800;
+  color: t.$quote-mark-color;
+  font-family: Georgia, serif;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  color: t.$star-color;
+
+  &.empty {
+    color: t.$star-color-empty;
+  }
+}
+
+.quote {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: t.$quote-color;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: t.$avatar-bg;
+  color: t.$avatar-text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.personMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: t.$name-color;
+}
+
+.role {
+  font-size: 0.82rem;
+  color: t.$role-color;
+}

@@ -1,0 +1,21 @@
+// Adjust this relative path if you drop the folder somewhere other than
+// src/features/marketing/landing/sections/HowItWorks/
+@import '../../../../../style/_variables.scss';
+
+// Local aliases — every value below traces back to _variables.scss.
+// Nothing new is introduced; this file only names things for this section's own use.
+
+$hiw-bg: $bg;
+$hiw-card: $bg-card;
+$hiw-border: $border;
+
+$hiw-text: $text;
+$hiw-text-muted: $text-secondary;
+
+$hiw-scan: $primary;
+$hiw-scan-glow: $primary-light;
+$hiw-scan-dark: $primary-dark;
+
+$hiw-ready: $success;
+
+$hiw-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
