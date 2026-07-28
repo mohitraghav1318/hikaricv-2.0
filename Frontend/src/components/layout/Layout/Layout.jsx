@@ -1,8 +1,8 @@
 import React from 'react';
 import { Outlet } from 'react-router';
-import Navbar from '../layout/Navbar/Navbar';
-import Footer from '../layout/Footer/Footer';
-import FeatureModal from '../FeatureModal';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
+import FeatureModal from '../../common/FeatureModal';
 
 const Layout = () => {
     return (
@@ -18,4 +18,3 @@ const Layout = () => {
 };
 
 export default Layout;
-

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import "../style/ui/loading.scss";
+import "../../../style/ui/loading.scss";
 
 const Loading = () => {
   return (

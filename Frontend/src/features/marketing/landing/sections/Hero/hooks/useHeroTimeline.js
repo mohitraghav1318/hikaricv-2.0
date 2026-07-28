@@ -82,8 +82,8 @@ export const useHeroTimeline = (refs) => {
               duration: 1.3,
               ease: "power2.out",
               onUpdate: () => {
-                if (!score2.current) return;
-                score2.current.textContent = Math.round(scoreProxy2.value);
+                if (!score1.current) return;
+                score1.current.textContent = Math.round(scoreProxy1.value);
               },
             },
             "rings"

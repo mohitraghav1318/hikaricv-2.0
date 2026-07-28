@@ -4,7 +4,7 @@ import { Mail, Lock, ArrowRight } from 'lucide-react'
 import styles from './Login.module.scss'
 import { useAuth } from '../hooks/useAuth'
 import { useAuthFormReveal } from '../hooks/useAuthFormReveal'
-import Loading from '../../../components/Loading'
+import Loading from '../../../components/common/Loading'
 
 
 const Login = () => {

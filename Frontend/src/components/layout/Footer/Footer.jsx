@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useRef } from "react";
-import { IconGithub, IconLinkedin, IconMail, IconSparkles, IconArrowUpRight } from "./icons";
+import { IconGithub, IconLinkedin, IconMail, IconSparkles, IconArrowUpRight } from "./FooterIcons";
 import styles from "./Footer.module.scss";
 import { useFooterReveal } from "./hooks/useFooterReveal";
 

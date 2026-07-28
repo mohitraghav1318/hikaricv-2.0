@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../style/interview.scss'
 import { useInterview } from '../hooks/useInterview.js'
 import { useNavigate, useParams } from 'react-router'
-import Loading from '../../../components/Loading'
+import Loading from '../../../components/common/Loading'
 import DashboardSidebar from '../components/DashboardSidebar'
 import {
     ChevronRight,
