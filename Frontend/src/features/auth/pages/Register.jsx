@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate, Link } from 'react-router'
-import "../auth.form.scss"
+import { User, Mail, Lock, ArrowRight } from 'lucide-react'
+import styles from './Register.module.scss'
 import { useAuth } from '../hooks/useAuth'
-import Loading from '../../../components/Loading'
+import { useAuthFormReveal } from '../hooks/useAuthFormReveal'
+import Loading from '../../../components/common/Loading'
 
 const Register = () => {
 
@@ -12,7 +14,21 @@ const Register = () => {
     const [ password, setPassword ] = useState("")
 
     const {loading,handleRegister} = useAuth()
-    
+
+    const headingRef = useRef(null)
+    const submitRef = useRef(null)
+    const fieldRefs = useRef([])
+    fieldRefs.current = []
+    const registerField = (el) => {
+        if (el) fieldRefs.current.push(el)
+    }
+
+    useAuthFormReveal({
+        heading: headingRef,
+        fields: fieldRefs,
+        submit: submitRef,
+    })
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         await handleRegister({username,email,password})
@@ -26,56 +42,51 @@ const Register = () => {
     }
 
     return (
-        <><main className="auth-page">
-            <section className="auth-visual" aria-hidden="true">
-                <div className="auth-visual__content">
-                    <p className="auth-brand">HikariCV</p>
-                    <h2>Master your career with AI precision.</h2>
-                    <p>Build interview plans with real-time AI feedback for your next role.</p>
-                </div>
-            </section>
+        <>
+            <div className={styles.heading} ref={headingRef}>
+                <h1>Create account</h1>
+                <p>Start building interview plans tailored to your next role.</p>
+            </div>
 
-            <section className="auth-panel">
-                <div className="form-container">
-                    <div className="auth-tabs">
-                        <Link className="auth-tabs__item" to="/login">Login</Link>
-                        <Link className="auth-tabs__item auth-tabs__item--active" to="/register">Sign Up</Link>
+            <form className={styles.form} onSubmit={handleSubmit}>
+
+                <div className={styles.inputGroup} ref={registerField}>
+                    <label htmlFor="username">Username</label>
+                    <div className={styles.inputShell}>
+                        <User size={17} strokeWidth={2} />
+                        <input
+                            onChange={(e) => { setUsername(e.target.value) }}
+                            type="text" id="username" name='username' placeholder='Enter username' />
                     </div>
-
-                    <div className="auth-heading">
-                        <h1>Create account</h1>
-                        <p>Start building interview plans tailored to your next role.</p>
-                    </div>
-
-                    <form onSubmit={handleSubmit}>
-
-                        <div className="input-group">
-                            <label htmlFor="username">Username</label>
-                            <input
-                                onChange={(e) => { setUsername(e.target.value) }}
-                                type="text" id="username" name='username' placeholder='Enter username' />
-                        </div>
-                        <div className="input-group">
-                            <label htmlFor="email">Email Address</label>
-                            <input
-                                onChange={(e) => { setEmail(e.target.value) }}
-                                type="email" id="email" name='email' placeholder='name@company.com' />
-                        </div>
-                        <div className="input-group">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                onChange={(e) => { setPassword(e.target.value) }}
-                                type="password" id="password" name='password' placeholder='Create password' />
-                        </div>
-
-                        <button className='button primary-button' >Create Account</button>
-
-                    </form>
-
-                    <p className="auth-switch">Already have an account? <Link to={"/login"} >Login</Link> </p>
                 </div>
-            </section>
-        </main></>
+                <div className={styles.inputGroup} ref={registerField}>
+                    <label htmlFor="email">Email Address</label>
+                    <div className={styles.inputShell}>
+                        <Mail size={17} strokeWidth={2} />
+                        <input
+                            onChange={(e) => { setEmail(e.target.value) }}
+                            type="email" id="email" name='email' placeholder='name@company.com' />
+                    </div>
+                </div>
+                <div className={styles.inputGroup} ref={registerField}>
+                    <label htmlFor="password">Password</label>
+                    <div className={styles.inputShell}>
+                        <Lock size={17} strokeWidth={2} />
+                        <input
+                            onChange={(e) => { setPassword(e.target.value) }}
+                            type="password" id="password" name='password' placeholder='Create password' />
+                    </div>
+                </div>
+
+                <button className={styles.submit} ref={submitRef}>
+                    Create Account
+                    <ArrowRight size={18} strokeWidth={2.4} />
+                </button>
+
+            </form>
+
+            <p className={styles.switch}>Already have an account? <Link to={"/login"}>Login</Link></p>
+        </>
     )
 }
 

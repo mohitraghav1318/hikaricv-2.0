@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import "../style/home.scss";
 import { useInterview } from '../hooks/useInterview.js';
-import Loading from '../../../components/Loading';
+import Loading from '../../../components/common/Loading';
 import { useAuth } from '../../auth/hooks/useAuth.js';
 import DashboardSidebar from '../components/DashboardSidebar';
 

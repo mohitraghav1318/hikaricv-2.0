@@ -5,48 +5,33 @@ import Protected from "./features/auth/components/Protected";
 import PublicOnly from "./features/auth/components/PublicOnly";
 import Home from "./features/interview/pages/Home";
 import Interview from "./features/interview/pages/Interview";
-import HiariCVLanding from "./features/landing/pages/HiariCVLanding";
+
+import HeroPreview from "./features/marketing/landing/HeroPreview";
 import ResetPassword from "./features/auth/pages/ResetPassword";
 import ForgotPassword from "./features/auth/pages/ForgotPassword";
 import VerifyEmail from "./features/auth/pages/VerifyEmail";
 
-import Docs from "./features/landing/pages/Docs";
-import AboutUs from "./features/landing/pages/AboutUs";
-import Pricing from "./features/landing/pages/Pricing";
-import NotFound from "./features/landing/pages/NotFound";
+import NotFound from "./features/errors/pages/NotFound";
 import Layout from "./components/layout/Layout";
+
+import AuthLayout from './features/auth/components/AuthLayout'
 
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
-        path: "/docs",
-        element: <Docs />
-      },
-      {
-        path: "/about",
-        element: <AboutUs />
-      },
-      {
-        path: "/pricing",
-        element: <Pricing />
-      },
-      {
-        path: "/login",
-        element: (
-          <PublicOnly>
-            <Login />
-          </PublicOnly>
-        )
-      },
-      {
-        path: "/register",
-        element: (
-          <PublicOnly>
-            <Register />
-          </PublicOnly>
-        )
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "/login",
+            element: <Login />,
+          },
+          {
+            path: "/register",
+            element: <Register />,
+          },
+        ],
       },
       {
         path: "/forgot-password",
@@ -60,10 +45,12 @@ export const router = createBrowserRouter([
         path: "/verify-email/:token",
         element: <VerifyEmail />
       },
+      
       {
         path: "/",
-        element: <HiariCVLanding />
+        element: <HeroPreview />
       },
+
       {
         path: "/dashboard",
         element: (

@@ -1,0 +1,216 @@
+// Path assumes this file lives at src/components/layout/Footer/Footer.module.scss
+@use "../../../style/_variables.scss" as *;
+
+.footer {
+  border-top: 1px solid $border;
+  background: $bg-secondary;
+  padding: 4rem 1.5rem 2rem;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// ---------------------------------------------------------------------
+// Top: brand + three columns
+// ---------------------------------------------------------------------
+
+.top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: 2.5rem;
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 2.5rem;
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.brandCol {
+  @media (max-width: 860px) {
+    grid-column: 1 / -1;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: $text;
+  text-decoration: none;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba($primary, 0.1);
+  color: $primary;
+}
+
+.brandAccent {
+  color: $primary;
+}
+
+.tagline {
+  margin: 0.85rem 0 0;
+  max-width: 34ch;
+  color: $text-secondary;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.socials {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid $border;
+  color: $text-secondary;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    color: #fff;
+    background: $primary;
+    border-color: $primary;
+    transform: translateY(-2px);
+  }
+}
+
+// ---------------------------------------------------------------------
+// Link columns
+// ---------------------------------------------------------------------
+
+.linkCol {
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $text;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  a {
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------
+// CTA card
+// ---------------------------------------------------------------------
+
+.ctaCol {
+  padding: 1.4rem;
+  border-radius: 16px;
+  background: $bg-card;
+  border: 1px solid $border;
+
+  h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: $text;
+  }
+
+  p {
+    margin: 0.5rem 0 1.1rem;
+    color: $text-secondary;
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  background: $primary;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: $primary-dark;
+    transform: translateY(-1px);
+  }
+}
+
+// ---------------------------------------------------------------------
+// Divider + bottom bar
+// ---------------------------------------------------------------------
+
+.divider {
+  height: 1px;
+  background: $border;
+  margin: 3rem 0 1.5rem;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.copy {
+  margin: 0;
+  color: $text-secondary;
+  font-size: 0.82rem;
+}
+
+.legal {
+  display: flex;
+  gap: 1.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  a {
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $primary;
+    }
+  }
+}

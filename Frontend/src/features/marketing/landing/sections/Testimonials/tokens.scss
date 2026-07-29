@@ -1,0 +1,35 @@
+// ===========================
+// Testimonials — tokens
+// Adjust the relative path below to match where /style/_variables.scss
+// actually sits relative to landing/sections/Testimonials/
+// (assumed: root/style/_variables.scss, root/landing/sections/Testimonials/tokens.scss)
+// ===========================
+@forward '../../../../../style/variables';
+@use '../../../../../style/variables' as v;
+
+// Layout
+$testimonials-max-width: 1200px;
+$testimonials-gap: 24px;
+$testimonials-card-radius: 20px;
+$testimonials-card-padding: 32px;
+
+// Colors (derived from global palette, named for local intent)
+$card-bg: v.$bg-card;
+$card-border: v.$border;
+$quote-mark-color: v.$primary;
+$star-color: v.$primary;
+$star-color-empty: v.$border;
+
+$heading-color: v.$text;
+$subheading-color: v.$text-secondary;
+$quote-color: v.$text;
+$name-color: v.$text;
+$role-color: v.$text-secondary;
+
+$avatar-bg: rgba(v.$primary, 0.1);
+$avatar-text: v.$primary-dark;
+
+// Motion
+$card-hover-lift: 6px;
+$transition-fast: 0.25s ease;
+$transition-medium: 0.4s cubic-bezier(0.22, 1, 0.36, 1);

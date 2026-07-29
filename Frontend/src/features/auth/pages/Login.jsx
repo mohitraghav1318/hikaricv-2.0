@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate, Link } from 'react-router'
-import "../auth.form.scss"
+import { Mail, Lock, ArrowRight } from 'lucide-react'
+import styles from './Login.module.scss'
 import { useAuth } from '../hooks/useAuth'
-import Loading from '../../../components/Loading'
+import { useAuthFormReveal } from '../hooks/useAuthFormReveal'
+import Loading from '../../../components/common/Loading'
 
 
 const Login = () => {
@@ -12,6 +14,20 @@ const Login = () => {
 
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
+
+    const headingRef = useRef(null)
+    const submitRef = useRef(null)
+    const fieldRefs = useRef([])
+    fieldRefs.current = []
+    const registerField = (el) => {
+        if (el) fieldRefs.current.push(el)
+    }
+
+    useAuthFormReveal({
+        heading: headingRef,
+        fields: fieldRefs,
+        submit: submitRef,
+    })
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -27,50 +43,42 @@ const Login = () => {
 
 
     return (
-        <><main className="auth-page">
-            <section className="auth-visual" aria-hidden="true">
-                <div className="auth-visual__content">
-                    <p className="auth-brand">HikariCV</p>
-                    <h2>Master your career with AI precision.</h2>
-                    <p>Build interview plans with real-time AI feedback for your next role.</p>
-                </div>
-            </section>
+        <>
+            <div className={styles.heading} ref={headingRef}>
+                <h1>Welcome back</h1>
+                <p>Enter your credentials to access your dashboard.</p>
+            </div>
 
-            <section className="auth-panel">
-                <div className="form-container">
-                    <div className="auth-tabs">
-                        <Link className="auth-tabs__item auth-tabs__item--active" to="/login">Login</Link>
-                        <Link className="auth-tabs__item" to="/register">Sign Up</Link>
+            <form className={styles.form} onSubmit={handleSubmit}>
+                <div className={styles.inputGroup} ref={registerField}>
+                    <label htmlFor="email">Email Address</label>
+                    <div className={styles.inputShell}>
+                        <Mail size={17} strokeWidth={2} />
+                        <input
+                            onChange={(e) => { setEmail(e.target.value) }}
+                            type="email" id="email" name='email' placeholder='name@company.com' />
                     </div>
-
-                    <div className="auth-heading">
-                        <h1>Welcome back</h1>
-                        <p>Enter your credentials to access your dashboard.</p>
-                    </div>
-
-                    <form onSubmit={handleSubmit}>
-                        <div className="input-group">
-                            <label htmlFor="email">Email Address</label>
-                            <input
-                                onChange={(e) => { setEmail(e.target.value) }}
-                                type="email" id="email" name='email' placeholder='name@company.com' />
-                        </div>
-                        <div className="input-group">
-                            <div className="input-label-row">
-                                <label htmlFor="password">Password</label>
-                                <Link to={"/forgot-password"}>Forgot?</Link>
-                            </div>
-                            <input
-                                onChange={(e) => { setPassword(e.target.value) }}
-                                type="password" id="password" name='password' placeholder='Enter password' />
-                        </div>
-                        <button className='button primary-button' >Login to Dashboard</button>
-                    </form>
-
-                    <p className="auth-switch">Don't have an account? <Link to={"/register"} >Create an account</Link> </p>
                 </div>
-            </section>
-        </main></>
+                <div className={styles.inputGroup} ref={registerField}>
+                    <div className={styles.labelRow}>
+                        <label htmlFor="password">Password</label>
+                        <Link to={"/forgot-password"}>Forgot?</Link>
+                    </div>
+                    <div className={styles.inputShell}>
+                        <Lock size={17} strokeWidth={2} />
+                        <input
+                            onChange={(e) => { setPassword(e.target.value) }}
+                            type="password" id="password" name='password' placeholder='Enter password' />
+                    </div>
+                </div>
+                <button className={styles.submit} ref={submitRef}>
+                    Login to Dashboard
+                    <ArrowRight size={18} strokeWidth={2.4} />
+                </button>
+            </form>
+
+            <p className={styles.switch}>Don't have an account? <Link to={"/register"}>Create an account</Link></p>
+        </>
     )
 }
 

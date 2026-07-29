@@ -1,0 +1,163 @@
+@use '../../../style/variables' as *;
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+
+  h1 {
+    margin: 0;
+    color: $text;
+    font-size: $fs-xl;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    margin: 0;
+    color: $text-secondary;
+    font-size: $fs-md;
+    line-height: 1.55;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+
+  label {
+    color: $text;
+    font-size: $fs-sm;
+    font-weight: 700;
+  }
+}
+
+.inputShell {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  svg {
+    position: absolute;
+    left: 0.9rem;
+    color: $text-secondary;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid $border;
+    outline: none;
+    padding-block: 0.9rem;
+    padding-inline: 2.75rem 1rem;
+    border-radius: $radius-sm;
+    color: $text;
+    background-color: $bg-card;
+    font: inherit;
+    font-size: $fs-sm;
+    transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+
+    &::placeholder {
+      color: $text-secondary;
+    }
+
+    &:focus {
+      border-color: $primary;
+      background-color: $bg-secondary;
+      box-shadow: 0 0 0 4px rgba($primary, 0.12);
+    }
+
+    &:focus ~ svg {
+      color: $primary;
+    }
+  }
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm;
+
+  a {
+    color: $primary-dark;
+    font-size: $fs-xs;
+    font-weight: 700;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xs;
+  width: 100%;
+  min-height: 3.5rem;
+  margin-top: $space-xs;
+  border: none;
+  border-radius: $radius-sm;
+  background-color: $primary;
+  color: #fff;
+  font-size: $fs-md;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: $shadow-primary;
+  transition: background-color 0.2s, transform 0.2s;
+
+  svg {
+    transition: transform 0.2s;
+  }
+
+  &:hover {
+    background-color: $primary-light;
+  }
+
+  &:active {
+    background-color: $primary-dark;
+    transform: translateY(1px);
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary-dark;
+    outline-offset: 3px;
+  }
+}
+
+.switch {
+  margin: 0;
+  text-align: center;
+  color: $text-secondary;
+  font-size: $fs-sm;
+
+  a {
+    color: $primary-dark;
+    font-weight: 800;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: $mobile) {
+  .heading h1 {
+    font-size: 1.75rem;
+  }
+}

@@ -1,0 +1,225 @@
+@use "./tokens" as *;
+
+.howItWorks {
+  background: $hiw-bg;
+  padding: clamp(72px, 10vw, 128px) 24px;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: $hiw-mono;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: $hiw-scan-dark;
+}
+
+.heading {
+  margin: 14px 0 0;
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  font-weight: 600;
+  color: $hiw-text;
+  max-width: 18ch;
+
+  span {
+    color: $hiw-scan;
+  }
+}
+
+.sub {
+  margin: 18px 0 0;
+  max-width: 46ch;
+  color: $hiw-text-muted;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+// ---------------------------------------------------------------------
+// The rail: the track the scan-light travels along, with three steps
+// arranged along it. Horizontal on desktop, vertical on mobile.
+// ---------------------------------------------------------------------
+
+$marker-size: 60px;
+
+.rail {
+  position: relative;
+  margin-top: 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+    gap: 32px;
+  }
+}
+
+.railTrack {
+  position: absolute;
+  background: $hiw-border;
+  pointer-events: none;
+
+  // Mobile: vertical line down the left edge, through marker centers.
+  top: 0;
+  bottom: 0;
+  left: calc(#{$marker-size} / 2 - 1px);
+  width: 2px;
+
+  @media (min-width: 900px) {
+    // Desktop: horizontal line across the marker row.
+    top: calc(#{$marker-size} / 2 - 1px);
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+  }
+}
+
+.scanner {
+  position: absolute;
+  border-radius: 999px;
+  background: $hiw-scan;
+  box-shadow:
+    0 0 0 4px rgba($hiw-scan, 0.14),
+    0 0 24px 4px rgba($hiw-scan, 0.55);
+
+  // Mobile: horizontal light sweeping down the vertical track.
+  top: 0%;
+  left: calc(#{$marker-size} / 2 - 1px);
+  width: 26px;
+  height: 3px;
+  transform: translate(-50%, -50%);
+
+  @media (min-width: 900px) {
+    // Desktop: vertical light sweeping across the horizontal track.
+    top: calc(#{$marker-size} / 2 - 1px);
+    left: 0%;
+    width: 3px;
+    height: 26px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 20px;
+  flex: 1;
+
+  @media (min-width: 900px) {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.marker {
+  flex: none;
+  width: $marker-size;
+  height: $marker-size;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $hiw-card;
+  border: 1px solid $hiw-border;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+  span {
+    font-family: $hiw-mono;
+    font-size: 0.85rem;
+    color: $hiw-text-muted;
+    transition: color 0.3s ease;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: $hiw-card;
+  border: 1px solid $hiw-border;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.contentHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+
+  h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: $hiw-text;
+  }
+}
+
+.tag {
+  flex: none;
+  font-family: $hiw-mono;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: $hiw-text-muted;
+  border: 1px solid $hiw-border;
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+.content p {
+  margin: 10px 0 0;
+  color: $hiw-text-muted;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+// Lit up once the scanner has passed this step.
+.step.is-active {
+  .marker {
+    border-color: $hiw-scan;
+    background: $hiw-scan;
+    box-shadow: 0 0 0 6px rgba($hiw-scan, 0.14);
+
+    span {
+      color: #fff;
+    }
+  }
+
+  .content {
+    border-color: rgba($hiw-scan, 0.35);
+    box-shadow: 0 8px 28px -18px rgba($hiw-scan-dark, 0.5);
+  }
+}
+
+// The final step reads "ready", so it resolves to success rather than
+// staying in scan-pink once lit — the resume has finished the pipeline.
+.stepReady.is-active {
+  .marker {
+    border-color: $hiw-ready;
+    background: $hiw-ready;
+    box-shadow: 0 0 0 6px rgba($hiw-ready, 0.16);
+  }
+
+  .content {
+    border-color: rgba($hiw-ready, 0.35);
+  }
+
+  .tag {
+    color: $hiw-ready;
+    border-color: rgba($hiw-ready, 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scanner {
+    display: none;
+  }
+}

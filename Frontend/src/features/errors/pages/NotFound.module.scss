@@ -1,0 +1,74 @@
+@use "../../../style/variables" as *;
+
+.wrapper {
+  min-height: calc(100vh - 64px); // subtract navbar height so footer isn't pushed off-screen
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $bg;
+  padding: 2rem;
+}
+
+.content {
+  text-align: center;
+  max-width: 480px;
+}
+
+.code {
+  display: block;
+  font-size: 5rem;
+  font-weight: 800;
+  color: $primary;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $text;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  color: $text-secondary;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  background: $primary;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.secondaryBtn {
+  background: transparent;
+  color: $text;
+  border: 1px solid $border;
+  padding: 0.7rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}

@@ -1,0 +1,376 @@
+@use "./tokens" as *;
+
+.features {
+  position: relative;
+  background: $color-bg;
+  padding: 6rem 2rem;
+
+  @media (max-width: 640px) {
+    padding: 4.5rem 1.25rem;
+  }
+}
+
+.sectionTitle {
+  max-width: 620px;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-primary-soft;
+  }
+
+  h2 {
+    font-family: $font-display;
+    font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: $color-ink;
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: $color-ink-muted;
+    margin: 0;
+    max-width: 480px;
+  }
+}
+
+.featuresGrid {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(0, auto);
+  gap: 1.5rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 620px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── shared card shell ──────────────────────────────────────────
+.card {
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: 20px;
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &.inView {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    border-color: $color-border-hover;
+    box-shadow: 0 20px 40px -24px rgba(23, 20, 26, 0.16);
+  }
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-primary-tint;
+  color: $color-primary;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.card h3 {
+  font-family: $font-display;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $color-ink;
+  margin: 0 0 0.5rem;
+}
+
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: $color-ink-muted;
+  margin: 0;
+}
+
+// ── resume card — the large tile, image gets the space the others don't need ──
+.resumeCard {
+  grid-column: span 2;
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 900px) {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 620px) {
+    grid-column: span 1;
+  }
+}
+
+.featureInfo {
+  margin-bottom: 1.5rem;
+}
+
+.resumePreview {
+  flex: 1;
+  min-height: 200px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: $color-surface-alt;
+  border: 1px solid $color-border;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transform: rotate(-1deg) scale(1.02);
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover & img {
+    transform: rotate(0deg) scale(1.04);
+  }
+}
+
+// ── interview card ─────────────────────────────────────────────
+.interviewCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: $color-surface-alt;
+  border: 1px solid $color-border;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.bar {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff6b9d, $color-primary);
+  transition: width 1.1s ease 0.2s;
+}
+
+.inView .bar {
+  width: 75%;
+}
+
+.progressLabel {
+  display: block;
+  margin-top: 0.65rem;
+  font-size: 0.85rem;
+  color: $color-ink-muted;
+
+  strong {
+    font-family: $font-mono;
+    color: $color-primary-soft;
+    font-weight: 600;
+  }
+}
+
+// ── skill gap card ─────────────────────────────────────────────
+.skillCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.gapMeters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.gapRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gapLabel {
+  font-size: 0.8rem;
+  color: $color-ink-muted;
+  font-weight: 500;
+}
+
+.gapTrack {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: $color-surface-alt;
+  border: 1px solid $color-border;
+  overflow: hidden;
+}
+
+.gapFill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: $color-primary;
+  opacity: 0.85;
+  transition: width 1.1s ease 0.3s;
+}
+
+.inView .gapFill {
+  width: var(--gap-level, 0%);
+}
+
+// ── roadmap card — full-width strip, steps carry real sequence info ──
+.roadmapCard {
+  grid-column: span 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+
+  @media (max-width: 900px) {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 620px) {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+}
+
+.left {
+  max-width: 320px;
+  flex-shrink: 0;
+
+  @media (max-width: 620px) {
+    max-width: none;
+  }
+}
+
+.roadmapButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: 9px;
+  border: none;
+  background: $color-primary;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+
+  svg {
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    background: $color-primary-soft;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -10px rgba(253, 34, 112, 0.5);
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 620px) {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  flex: 1;
+  max-width: 420px;
+
+  @media (max-width: 620px) {
+    max-width: none;
+    padding-top: 0.5rem;
+  }
+}
+
+.step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  text-align: center;
+
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: calc(50% + 18px);
+    width: calc(100% - 36px);
+    height: 2px;
+    background: $color-border;
+    z-index: 1;
+  }
+
+  // first step reads as "you are here" — the only step actually in progress
+  &:first-child .stepNumber {
+    background: $color-primary;
+    border-color: $color-primary;
+    color: #fff;
+  }
+}
+
+.stepNumber {
+  position: relative;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-mono;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: $color-surface;
+  border: 2px solid $color-border;
+  color: $color-ink-muted;
+}
+
+.stepLabel {
+  font-size: 0.8rem;
+  color: $color-ink-muted;
+  font-weight: 500;
+  max-width: 90px;
+}
