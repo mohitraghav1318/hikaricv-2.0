@@ -18,17 +18,10 @@ Here is the interface and flow of HikariCV, designed with a premium, minimalist 
 A modern UI featuring glassmorphism, responsive bento grids, and smooth animations highlighting our AI capability.
 ![Landing Page Screenshot](Frontend/public/Readme/home.png)
 
-### 🔑 Security & Authentication
-Secure entry points featuring email verification, rate limiting, and password recovery.
-![Login Page Screenshot](Frontend/public/Readme/login.png)
 
 ### 📊 Interview Prep & Strategy Dashboard
 Users specify a target job description and upload a resume (PDF) or type a self-description to generate a customized strategy.
 ![Dashboard Screenshot](Frontend/public/Readme/dashboard.png)
-
-### 💎 Pricing Model
-Transparent, flexible pricing models integrated with the landing page design system.
-![Pricing Page Screenshot](Frontend/public/Readme/pricing.png)
 
 ---
 
@@ -77,88 +70,7 @@ This repository showcases a professional, decoupled Client-Server architecture u
     *   **Express Rate Limiter:** Protects API endpoints from abuse.
     *   **Email Verification & Recovery:** Fully automated mail service templates.
 
----
 
-## 📁 Repository Structure
-
-```bash
-├── Backend
-│   ├── src
-│   │   ├── config          # DB and system connections
-│   │   ├── controllers     # HTTP Route handlers
-│   │   ├── middlewares     # Rate limiters, file uploads (Multer), JWT verification
-│   │   ├── models          # MongoDB schemas (User, InterviewReport, Blacklist)
-│   │   ├── routes          # API endpoints (/api/auth, /api/interview)
-│   │   ├── services        # Gemini GenAI, Puppeteer PDF generation
-│   │   └── app.js          # Express app initialization
-│   ├── server.js           # Server entrypoint
-│   └── package.json
-│
-└── Frontend
-    ├── src
-    │   ├── components      # Global layout, UI elements, loaders, and Navbar
-    │   ├── features
-    │   │   ├── auth        # Auth pages (Login, Register, Password Reset) & hooks
-    │   │   ├── interview   # Dashboard, Report pages, and preparation hooks
-    │   │   └── landing     # Landing pages (Pricing, About, Docs, Home)
-    │   ├── seo             # SEO controllers & structured JSON-LD data
-    │   ├── app.routes.jsx  # React Router v7 routes configuration
-    │   └── main.jsx        # Frontend entrypoint
-    ├── public              # Static assets, including Readme screenshots
-    └── package.json
-```
-
----
-
-## ⚙️ Local Development Setup
-
-To run this project locally, make sure you have **Node.js (v18+)** and **MongoDB** installed.
-
-### 1. Setup Backend
-1. Navigate to the `Backend` directory:
-   ```bash
-   cd Backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file in the `Backend` directory with the following variables:
-   ```env
-   PORT=5000
-   MONGO_URI=mongodb://localhost:27017/hikaricv
-   JWT_SECRET=your_super_secret_jwt_key
-   FRONTEND_URL=http://localhost:5173
-   GOOGLE_GENAI_API_KEY=your_gemini_api_key
-   # Email Config (Nodemailer / Resend)
-   RESEND_API_KEY=your_resend_api_key
-   EMAIL_FROM=noreply@hikaricv.com
-   ```
-4. Start the backend development server:
-   ```bash
-   npm run dev
-   ```
-
-### 2. Setup Frontend
-1. Navigate to the `Frontend` directory:
-   ```bash
-   cd ../Frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file in the `Frontend` directory:
-   ```env
-   VITE_API_URL=http://localhost:5000
-   ```
-4. Start the frontend Vite server:
-   ```bash
-   npm run dev
-   ```
-5. Open your browser and navigate to `http://localhost:5173`.
-
----
 
 ## 💡 Developer Value
 *   **Clean Code & Architecture:** Decoupled frontend features allow easy scaling. The backend follows classic MVC separation, ensuring clean controllers, middlewares, and services.
