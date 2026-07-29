@@ -1,6 +1,6 @@
 // Adjust this relative path if you drop the folder somewhere other than
 // src/features/marketing/landing/sections/HowItWorks/
-@import '../../../../../style/_variables.scss';
+@use '../../../../../style/_variables.scss' as *;
 
 // Local aliases — every value below traces back to _variables.scss.
 // Nothing new is introduced; this file only names things for this section's own use.

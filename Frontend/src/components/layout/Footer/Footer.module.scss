@@ -1,5 +1,5 @@
 // Path assumes this file lives at src/components/layout/Footer/Footer.module.scss
-@import "../../../style/_variables.scss";
+@use "../../../style/_variables.scss" as *;
 
 .footer {
   border-top: 1px solid $border;
