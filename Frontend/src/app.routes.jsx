@@ -11,7 +11,7 @@ import ResetPassword from "./features/auth/pages/ResetPassword";
 import ForgotPassword from "./features/auth/pages/ForgotPassword";
 import VerifyEmail from "./features/auth/pages/VerifyEmail";
 
-import NotFound from "./features/errors/pages/NotFound";
+import NotFound from "./features/errors/NotFound";
 import Layout from "./components/layout/Layout";
 
 import AuthLayout from './features/auth/components/AuthLayout'

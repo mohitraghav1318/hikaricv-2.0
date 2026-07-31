@@ -1,0 +1,25 @@
+// Adjust this path if your alias setup differs.
+// From src/features/marketing/landing/sections/FAQ/tokens.scss
+// -> src/style/_variables.scss
+@use "../../../../../style/variables" as *;
+
+// FAQ section tokens — derived only from global variables
+
+$faq-bg: $bg;
+$faq-card-bg: $bg-card;
+$faq-border: $border;
+
+$faq-heading-color: $text;
+$faq-text-color: $text-secondary;
+
+$faq-accent: $primary;
+$faq-accent-hover: $primary-light;
+$faq-accent-active: $primary-dark;
+
+$faq-icon-bg: rgba($primary, 0.08);
+$faq-icon-bg-open: $primary;
+$faq-icon-line: $primary;
+$faq-icon-line-open: $bg-secondary;
+
+$faq-radius: 14px;
+$faq-transition: 0.3s ease;
