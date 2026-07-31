@@ -1,0 +1,56 @@
+@use "./tokens" as *;
+
+.faq {
+  padding: 96px 24px;
+  background: $faq-bg;
+
+  @media (max-width: 768px) {
+    padding: 64px 20px;
+  }
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 56px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $faq-accent;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  color: $faq-heading-color;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: $faq-text-color;
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

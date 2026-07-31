@@ -1,0 +1,98 @@
+@use "../tokens" as *;
+
+.item {
+  background: $faq-card-bg;
+  border: 1px solid $faq-border;
+  border-radius: $faq-radius;
+  overflow: hidden;
+  transition: border-color $faq-transition;
+
+  &:hover {
+    border-color: rgba($faq-accent, 0.3);
+  }
+}
+
+.itemOpen {
+  border-color: $faq-accent;
+}
+
+.question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  color: $faq-heading-color;
+  font-family: inherit;
+
+  @media (max-width: 480px) {
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+}
+
+.icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: $faq-icon-bg;
+  transition: background $faq-transition, transform $faq-transition;
+}
+
+.itemOpen .icon {
+  background: $faq-icon-bg-open;
+  transform: rotate(45deg);
+}
+
+.iconLineHorizontal,
+.iconLineVertical {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: $faq-icon-line;
+  transform: translate(-50%, -50%);
+  transition: background $faq-transition;
+}
+
+.iconLineHorizontal {
+  width: 12px;
+  height: 2px;
+}
+
+.iconLineVertical {
+  width: 2px;
+  height: 12px;
+}
+
+.itemOpen .iconLineHorizontal,
+.itemOpen .iconLineVertical {
+  background: $faq-icon-line-open;
+}
+
+.answer {
+  padding: 0 22px;
+
+  @media (max-width: 480px) {
+    padding: 0 18px;
+  }
+}
+
+.answerText {
+  padding-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: $faq-text-color;
+
+  @media (max-width: 480px) {
+    padding-bottom: 16px;
+  }
+}
