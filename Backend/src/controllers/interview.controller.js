@@ -37,17 +37,27 @@ async function generateInterViewReportController(req, res) {
             jobDescription
         })
 
-        // 6. Explicitly pick expected fields instead of blind spread
-        const { score, feedback, suggestions } = interViewReportByAi
+        // 6. Explicitly pick expected fields matching the AI schema + model requirements
+        const {
+            title,
+            matchScore,
+            technicalQuestions,
+            behavioralQuestions,
+            skillGaps,
+            preparationPlan
+        } = interViewReportByAi
 
         const interviewReport = await interviewReportModel.create({
             user: req.user.id,
             resume: resumeContent.text,
             selfDescription,
             jobDescription,
-            score,
-            feedback,
-            suggestions
+            title,
+            matchScore,
+            technicalQuestions,
+            behavioralQuestions,
+            skillGaps,
+            preparationPlan
         })
 
         res.status(201).json({
