@@ -1,0 +1,168 @@
+$primary: #fd2270;
+$primary-light: #ff4d8d;
+$primary-dark: #d91b5f;
+
+$bg: #f7f5f2;
+$bg-secondary: #ffffff;
+$bg-card: #fbfaf8;
+
+$text: #17141a;
+$text-secondary: rgba(23, 20, 26, 0.62);
+
+$border: rgba(23, 17, 17, 0.08);
+
+.loadingContainer {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.75rem;
+
+  background: $bg;
+}
+
+// Radial glow behind the card so bg doesn't feel flat/empty
+.glow {
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba($primary, 0.14) 0%,
+    rgba($primary, 0.05) 40%,
+    transparent 70%
+  );
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+// Stronger, visible dot grid
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba($text, 0.14) 1.4px,
+    transparent 1.4px
+  );
+  background-size: 26px 26px;
+  mask-image: radial-gradient(
+    circle at center,
+    black 0%,
+    rgba(0, 0, 0, 0.5) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+}
+
+.scanBox {
+  position: relative;
+  padding: 2rem 3.5rem;
+  border: 1px solid $border;
+  border-radius: 14px;
+  background: $bg-secondary;
+  box-shadow:
+    0 1px 2px rgba($text, 0.04),
+    0 12px 32px rgba($text, 0.06),
+    0 0 0 1px rgba($primary, 0.02);
+  overflow: hidden;
+
+  &__text {
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: $text;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      $primary 15%,
+      $primary-light 50%,
+      $primary 85%,
+      transparent
+    );
+    box-shadow: 0 0 14px 2px rgba($primary, 0.55);
+  }
+
+  // Scanner corner brackets
+  &::before,
+  &::after,
+  .cornerTL,
+  .cornerBR {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid $primary;
+  }
+
+  &::before {
+    top: 6px;
+    left: 6px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  &::after {
+    bottom: 6px;
+    right: 6px;
+    border-left: none;
+    border-top: none;
+  }
+}
+
+.progressRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+
+  &__percent {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: $primary;
+    min-width: 3ch;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: $text-secondary;
+    text-transform: uppercase;
+  }
+}
+
+.progressTrack {
+  width: 240px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba($text, 0.08);
+  overflow: hidden;
+
+  &__fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+    background: linear-gradient(
+      90deg,
+      $primary-dark,
+      $primary,
+      $primary-light
+    );
+    box-shadow: 0 0 8px rgba($primary, 0.5);
+  }
+}
