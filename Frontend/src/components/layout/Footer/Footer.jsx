@@ -18,7 +18,7 @@ const COMPANY_LINKS = [
 const SOCIAL_LINKS = [
   { label: "GitHub", href: "https://github.com/mohitraghav1318", icon: IconGithub },
   { label: "LinkedIn", href: "https://linkedin.com/in/mohitraghav1318", icon: IconLinkedin },
-  { label: "Email", href: "mailto:hello@hikaricv.com", icon: IconMail },
+  { label: "Email", href: "mailto:hikaricv.admin@gmail.com", icon: IconMail },
 ];
 
 const LEGAL_LINKS = [
