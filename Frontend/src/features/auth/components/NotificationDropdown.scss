@@ -37,7 +37,31 @@
         color: #1e1b29;
     }
 
+    .header-actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
     .mark-read-btn {
+        background: transparent;
+        border: none;
+        color: $primary;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+    }
+
+    .clear-all-btn {
         background: transparent;
         border: none;
         color: $primary;

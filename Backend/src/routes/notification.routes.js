@@ -18,4 +18,11 @@ notificationRouter.get("/", authMiddleware.authUser, notificationController.getN
  */
 notificationRouter.post("/mark-read", authMiddleware.authUser, notificationController.markAllReadController);
 
+/**
+ * @route DELETE /api/notifications
+ * @description Delete all notifications of the logged in user
+ * @access Private
+ */
+notificationRouter.delete("/", authMiddleware.authUser, notificationController.clearAllNotificationsController);
+
 module.exports = notificationRouter;

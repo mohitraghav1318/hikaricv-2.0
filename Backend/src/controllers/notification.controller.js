@@ -60,7 +60,23 @@ async function markAllReadController(req, res) {
     }
 }
 
+async function clearAllNotificationsController(req, res) {
+    try {
+        const userId = req.user.id;
+
+        await notificationModel.deleteMany({ user: userId });
+
+        res.status(200).json({
+            message: "All notifications cleared."
+        });
+    } catch (err) {
+        console.error("Error in clearAllNotificationsController:", err);
+        res.status(500).json({ message: "Internal server error." });
+    }
+}
+
 module.exports = {
     getNotificationsController,
-    markAllReadController
+    markAllReadController,
+    clearAllNotificationsController
 };

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 import { Menu, X, Bell } from "lucide-react";
 import { useAuth } from "../../../features/auth/hooks/useAuth";
-import { getNotifications, markNotificationsAsRead } from "../../../features/auth/services/notification.api";
+import { getNotifications, markNotificationsAsRead, clearNotifications } from "../../../features/auth/services/notification.api";
 import { resendVerification } from "../../../features/auth/services/auth.api";
 import NotificationDropdown from "../../../features/auth/components/NotificationDropdown";
 import styles from "./Navbar.module.scss";
@@ -73,7 +73,16 @@ const Navbar = () => {
     }
   };
 
-  const handleLogoutClick = async () => {
+  const handleClearAllNotifications = async () => {
+        try {
+            await clearNotifications();
+            setNotifications([]);
+        } catch (err) {
+            console.error("Failed to clear notifications", err);
+        }
+    }
+
+   const handleLogoutClick = async () => {
     if (handleLogout) await handleLogout();
     setOpen(false);
     navigate("/login");
@@ -102,6 +111,7 @@ const Navbar = () => {
           resendMessage={resendMessage}
           resendError={resendError}
           onClose={() => setDropdownOpen(false)}
+          onClearAllNotifications={handleClearAllNotifications}
         />
       )}
     </div>

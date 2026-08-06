@@ -24,3 +24,23 @@ export async function markNotificationsAsRead() {
         throw err.response?.data || { message: "Something went wrong" };
     }
 }
+
+export async function clearNotifications() {
+    try {
+        const response = await api.delete("/api/notifications");
+        return response.data;
+    } catch (err) {
+        console.error("Error in clearNotifications:", err);
+        throw err.response?.data || { message: "Something went wrong" };
+    }
+}
+
+export async function clearNotifications() {
+    try {
+        const response = await api.delete("/api/notifications");
+        return response.data;
+    } catch (err) {
+        console.error("Error in clearNotifications:", err);
+        throw err.response?.data || { message: "Something went wrong" };
+    }
+}
